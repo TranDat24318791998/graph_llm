@@ -1,0 +1,13 @@
+# Study area for the first phase: a fixed rectangle around District 1, Ho Chi Minh City.
+# The rectangle is deliberately not the administrative boundary. It covers District 1
+# and small parts of the neighbouring districts, and it never changes, so the
+# downloaded graph does not depend on how OpenStreetMap draws district borders.
+area_id: hcmc_district1
+description: Fixed rectangle around District 1, Ho Chi Minh City
+bounding_box:
+  west: 106.6800
+  south: 10.7550
+  east: 106.7130
+  north: 10.7970
+network_type: drive
+simplify: true

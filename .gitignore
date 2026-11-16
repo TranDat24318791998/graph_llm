@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Tool caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Raw and derived data are reproducible from scripts and are not versioned.
+# The benchmark (data/benchmark/) is versioned.
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Raw run outputs are large and immutable; they live outside git.
+runs/
+
+# Local model weights and LLM response cache
+models/
+.cache/
+
+# OSMnx HTTP cache of raw Overpass responses
+cache/
+
+# Editor and OS
+.vscode/
+.idea/
+.DS_Store
