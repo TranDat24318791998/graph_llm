@@ -88,3 +88,4 @@ Additional counts:
 
 - 2026-11-25, before any EXP-003 run: run order changed to M0, M1, M3, M3N, M3T first, then the LightRAG index on corpus text_v2, then M2, so that the five runs that need no index finish overnight. Runs still execute one at a time; the only earlier job sharing the machine is the EXP-001 M2 reference run, which finishes before the first EXP-003 run starts.
 - 2026-11-25, before any EXP-003 run: the corpus is `hcmc_district1_v3_p2_text_v2` (the first build, text_v1, described places as streets and was replaced before use; see `PROGRESS.md`).
+- 2026-11-25 09:04, before the M2 run: the LightRAG index build on corpus text_v2 was stopped by the owner (machine shut down) after 3.25 h, with 107 of about 139 packs started. It is resumed later with the same command and settings; LightRAG skips finished packs. Index time and tokens are reported as the sum of both sessions, taken from the logs.
