@@ -1,0 +1,103 @@
+{
+  "config": {
+    "benchmark_version": "v0.3",
+    "graph_version": "hcmc_district1_v3_p2",
+    "split": "development",
+    "seed": 20261125,
+    "templates": [
+      {
+        "template_id": "L1_oneway",
+        "text": "Đường {street} có phải là đường một chiều không?",
+        "count": 25,
+        "required_phrases": [
+          "một chiều"
+        ]
+      },
+      {
+        "template_id": "L1_length",
+        "text": "Tổng chiều dài đường {street} trong khu vực có lớn hơn {threshold_m} mét không?",
+        "count": 25,
+        "required_phrases": [
+          "lớn hơn",
+          "mét"
+        ]
+      },
+      {
+        "template_id": "L2_neighbours",
+        "text": "Những đường nào giao nhau hoặc nối trực tiếp với đường {street}? Không tính hẻm và đường nội bộ.",
+        "count": 50,
+        "required_phrases": [
+          "hẻm",
+          "nội bộ"
+        ]
+      },
+      {
+        "template_id": "L3_next_on_oneway",
+        "text": "Một xe đang ở giao lộ giữa đường {cross_street} và đường {oneway_street}. Đường {oneway_street} là đường một chiều. Nếu xe đi tiếp theo đường {oneway_street} đúng chiều lưu thông, thì đường đầu tiên mà xe gặp tiếp theo là đường nào? Không tính hẻm và đường nội bộ.",
+        "count": 50,
+        "required_phrases": [
+          "một chiều",
+          "hẻm",
+          "nội bộ"
+        ]
+      },
+      {
+        "template_id": "L4_shortest_route",
+        "text": "Tìm tuyến đường ngắn nhất cho ô tô, tuân thủ đường một chiều và các biển cấm rẽ, đi từ giao lộ đường {start_a} và đường {start_b} đến giao lộ đường {end_a} và đường {end_b}. Cho biết thứ tự các đường đi qua và tổng chiều dài tuyến đường tính bằng mét.",
+        "count": 50,
+        "required_phrases": [
+          "ngắn nhất",
+          "tuân thủ",
+          "một chiều",
+          "cấm rẽ",
+          "mét"
+        ]
+      },
+      {
+        "template_id": "L5_two_way_neighbours",
+        "text": "Trong các đường giao nhau hoặc nối trực tiếp với đường {street} (không tính hẻm và đường nội bộ), có bao nhiêu đường cho phép xe đi hai chiều trên toàn tuyến (kể cả đường đôi có dải phân cách)?",
+        "count": 25,
+        "required_phrases": [
+          "hai chiều",
+          "hẻm",
+          "nội bộ"
+        ]
+      },
+      {
+        "template_id": "L5_common_neighbours",
+        "text": "Có bao nhiêu đường giao nhau hoặc nối trực tiếp với cả đường {street_a} và đường {street_b}? Không tính hẻm và đường nội bộ.",
+        "count": 25,
+        "required_phrases": [
+          "cả",
+          "hẻm",
+          "nội bộ"
+        ]
+      }
+    ],
+    "paraphrase_instruction": "Viết lại câu hỏi sau bằng tiếng Việt tự nhiên, như một người dân hỏi đường. Giữ nguyên ý nghĩa và mọi điều kiện của câu hỏi.\nGiữ nguyên chính xác tên mọi con đường (không viết tắt, không bỏ dấu, không thêm chữ \"đường\" vào giữa tên).\nChỉ trả về câu hỏi đã viết lại, không giải thích.\n"
+  },
+  "created_at": "2026-11-24T18:33:16.166104Z",
+  "question_count": 250,
+  "counts_by_template": {
+    "L1_oneway": 25,
+    "L1_length": 25,
+    "L2_neighbours": 50,
+    "L3_next_on_oneway": 50,
+    "L4_shortest_route": 50,
+    "L5_two_way_neighbours": 25,
+    "L5_common_neighbours": 25
+  },
+  "paraphrase_model": "qwen2.5-7b-ctx16k",
+  "paraphrase_fallback_question_ids": [
+    "L3_next_on_oneway_005",
+    "L3_next_on_oneway_009",
+    "L3_next_on_oneway_013",
+    "L3_next_on_oneway_016",
+    "L3_next_on_oneway_018",
+    "L3_next_on_oneway_020",
+    "L3_next_on_oneway_029",
+    "L3_next_on_oneway_033",
+    "L3_next_on_oneway_036"
+  ],
+  "questions_sha256": "e415c73fda93645439c8507366607265e265c73a7f6cad71d77c7d9749c3d69d"
+}

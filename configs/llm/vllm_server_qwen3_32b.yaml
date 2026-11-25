@@ -1,0 +1,8 @@
+# The shared vLLM server at the office (client use only). Not used in Phase 1.
+base_url: http://127.0.0.1:8200/v1
+model: theracore-llm
+api_key_env: VLLM_API_KEY
+temperature: 0.0
+seed: 0
+max_tokens: 1024
+timeout_s: 600.0

@@ -11,12 +11,19 @@ from graph_llm.schemas.question import Answer
 
 
 class Representation(StrEnum):
-    """The five ways the road network is presented to the LLM."""
+    """The ways the road network is presented to the LLM.
+
+    M0-M4 are the five representations of the proposal. M3N and M3T are Phase 1
+    variants (EXP-002): M3 with intersection names instead of node ids, and the M1
+    text corpus selected through the street graph instead of by similarity.
+    """
 
     M0_NO_RETRIEVAL = "M0"
     M1_TEXT_RAG = "M1"
     M2_LLM_BUILT_GRAPH = "M2"
     M3_SUBGRAPH = "M3"
+    M3_SUBGRAPH_NAMED_NODES = "M3N"
+    M3_GRAPH_LINKED_TEXT = "M3T"
     M4_GRAPH_TOOLS = "M4"
 
 
@@ -24,6 +31,8 @@ class ErrorStage(StrEnum):
     """The pipeline stage a wrong answer is attributed to."""
 
     NONE = "none"
+    OUTPUT_FORMAT = "output_format"
+    NO_CONTEXT = "no_context"
     ENTITY_LINKING = "entity_linking"
     RETRIEVAL = "retrieval"
     USAGE = "usage"
@@ -78,3 +87,7 @@ class Score(StrictModel):
         description="Share of required evidence present in the context. None for M0 and M4.",
     )
     error_stage: ErrorStage
+    sub_scores: dict[str, float] = Field(
+        default_factory=dict,
+        description="Type-specific components, for example route legality and optimality for L4.",
+    )

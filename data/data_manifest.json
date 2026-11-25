@@ -1,0 +1,20 @@
+{
+  "created_at": "2026-11-24T16:06:04.495153Z",
+  "created_on_host": "192.168.1.202",
+  "remote": "gdrive:graph_llm_data",
+  "directories": [
+    "data/raw"
+  ],
+  "files": [
+    {
+      "path": "data/raw/hcmc_district1_v2/graph.graphml",
+      "size_bytes": 2262296,
+      "sha256": "94e84d853284f86fc146b81488e87368bbd0b01c1089308069cab7e7f6cf1d4d"
+    },
+    {
+      "path": "data/raw/hcmc_district1_v2/metadata.json",
+      "size_bytes": 541,
+      "sha256": "1bf626500a0c701fd04d2d43367d271636cbe207a65668533ddce0a85e6c0bec"
+    }
+  ]
+}

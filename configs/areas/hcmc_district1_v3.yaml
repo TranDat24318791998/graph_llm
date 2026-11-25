@@ -1,0 +1,17 @@
+# Study area for graph v2 processing: the same fixed rectangle around District 1,
+# downloaded WITHOUT OSMnx simplification (2026-11-25).
+# Reason: OSMnx's default simplification merges consecutive OSM ways into one edge even
+# when their names differ (for example a bridge and the street it leads into), and
+# such an edge cannot be split again afterwards. Graph v2 runs its own simplification
+# that keeps a node wherever name, road class, direction or other attributes change,
+# and wherever a turn restriction acts (docs/graph_v2_design.md).
+# Turn restrictions are downloaded right after the graph, with the same area id.
+area_id: hcmc_district1_v3
+description: Fixed rectangle around District 1, Ho Chi Minh City (third download, unsimplified, local machine)
+bounding_box:
+  west: 106.6800
+  south: 10.7550
+  east: 106.7130
+  north: 10.7970
+network_type: drive
+simplify: false

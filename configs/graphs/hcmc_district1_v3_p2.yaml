@@ -1,0 +1,146 @@
+# Reference graph v2 (docs/graph_v2_design.md), built by scripts/build_reference_graph.py.
+# Source: unsimplified snapshot hcmc_district1_v3 and its turn restrictions.
+# The street-layer rules below are carried over from graph v1 (hcmc_district1_v2_p1);
+# overrides are re-validated by the build, because the new simplification keeps more
+# nodes and can split names into different pieces.
+streets:
+  # Processing of snapshot hcmc_district1_v2 into the graph used in Phase 1.
+  # A processed graph is frozen: any change to this file needs a new graph_version.
+  # Decisions agreed with the owner on 2026-11-24 (see plan/PLAN.md, decision log).
+  graph_version: hcmc_district1_v3_p2
+  source_area_id: hcmc_district1_v3
+
+  # Pieces of one name are one street if a path of at most this many metres joins them.
+  merge_gap_m: 200.0
+
+  # Roads inside residential compounds and apartment blocks. They stay in the road
+  # graph for routing but are not asked about. ("Nhánh N1" and "Nhánh N2" are internal too,
+  # but lie outside the largest strongly connected component, so they are removed anyway.)
+  internal_road_names:
+    - Aqua 1
+    - Aqua 3
+    - Aqua 4
+    - Riverview 3
+    - Riverview 4
+    - Riverview 5
+    - Riverview 6
+    - Riverview 7
+    - Riverview 8
+    - Riverview 9
+    - Đường Nội Bộ
+    - Đường Nội Bộ A
+    - Đường Lô J - Lô K Cư Xá Vĩnh Hội
+    - Đường Lô M - Lô N Cư Xá Vĩnh Hội
+    - Chung Cư Trần Quốc Thảo
+    - Chung cư Lý Văn Phức
+    - Cư xá Nguyễn Văn Trỗi
+
+  # Names whose pieces stay apart after the automatic rule. Each needs a reviewed decision.
+  street_overrides:
+    # Added for graph v2 (2026-11-25): the new simplification no longer merges the bridge
+    # into Nguyễn Hữu Cảnh, so its pieces appear separately.
+    - name: Cầu Thị Nghè 2
+      decision: merge
+      reason: "Four parallel one-way carriageways of one bridge over the Thị Nghè canal (each about 165 m, centres within 30 m of each other around (10.7875, 106.7095)) and its 188 m approach edge; one bridge."
+    # Same neighbourhood, at most about 1 km apart along the road network: one street
+    # that OSM interrupts (for example by a segment with another name or a non-drivable
+    # segment). To be confirmed on a map by the owner.
+    - name: Dẫn Cầu Calmette
+      decision: merge
+      reason: Two pieces 460 m apart along the road network in the same neighbourhood.
+    - name: Mai Thị Lựu
+      decision: merge
+      reason: Two pieces 341 m apart along the road network in the same neighbourhood.
+    - name: Nguyễn Cảnh Chân
+      decision: merge
+      reason: Two pieces 921 m apart along the road network in the same neighbourhood.
+    - name: Nguyễn Trung Ngạn
+      decision: merge
+      reason: Two pieces 361 m apart along the road network in the same neighbourhood.
+    - name: Ngô Đức Kế
+      decision: merge
+      reason: Two pieces 352 m apart along the road network in the same neighbourhood.
+    - name: Trường Sa
+      decision: merge
+      reason: Two pieces 360 m apart along the road network in the same neighbourhood.
+    - name: Trần Nguyên Đán
+      decision: merge
+      reason: Two pieces 267 m apart along the road network in the same neighbourhood.
+    - name: Tôn Thất Đạm
+      decision: merge
+      reason: Two pieces 248 m apart along the road network in the same neighbourhood.
+    - name: Vĩnh Hội
+      decision: merge
+      reason: Two pieces 537 m apart along the road network in the same neighbourhood.
+    # More than 1.7 km apart along the road network: different streets that share a name.
+    # Coordinates are (latitude, longitude) of each piece, to be confirmed on a map by the owner.
+    - name: Cô Bắc
+      decision: separate
+      reason: Pieces 4459 m apart along the road network (1389 m around (10.7643, 106.6941); 121 m around (10.7959, 106.6824)); different streets that share a name.
+    - name: Cô Giang
+      decision: separate
+      reason: Pieces 4558 m apart along the road network (1310 m around (10.7633, 106.6951); 508 m around (10.7961, 106.6834)); different streets that share a name.
+    - name: Huỳnh Tịnh Của
+      decision: separate
+      reason: Pieces 2845 m apart along the road network (465 m around (10.7917, 106.7098); 690 m around (10.7893, 106.6875)); different streets that share a name.
+    - name: Lê Quý Đôn
+      decision: separate
+      reason: Pieces 1728 m apart along the road network (1776 m around (10.7813, 106.6909); 32 m around (10.7913, 106.6801)); different streets that share a name.
+    - name: Nguyễn Công Trứ
+      decision: separate
+      reason: Pieces 2844 m apart along the road network (646 m around (10.7916, 106.7101); 2013 m around (10.7678, 106.7006)); different streets that share a name.
+    - name: Nguyễn Trường Tộ
+      decision: separate
+      reason: Pieces 4524 m apart along the road network (767 m around (10.7667, 106.7043); 132 m around (10.7938, 106.6832)); different streets that share a name.
+    - name: Phạm Viết Chánh
+      decision: separate
+      reason: Pieces 4143 m apart along the road network (860 m around (10.7902, 106.7107); 945 m around (10.7665, 106.6832)); different streets that share a name.
+    - name: Đường Số 11
+      decision: separate
+      reason: Pieces 5849 m apart along the road network (181 m around (10.7964, 106.6920); 202 m around (10.7569, 106.7026)); different streets that share a name.
+    - name: Đường Số 13
+      decision: separate
+      reason: Pieces 5825 m apart along the road network (147 m around (10.7967, 106.6934); 270 m around (10.7568, 106.7031)); different streets that share a name.
+    - name: Đường Số 16
+      decision: separate
+      reason: Pieces 5725 m apart along the road network (101 m around (10.7967, 106.6940); 545 m around (10.7560, 106.7040)); different streets that share a name.
+
+  # Other ways people write a name. Draft, to be reviewed by the owner.
+  # ("3 Tháng 2" only touches the west edge of the rectangle, outside the largest
+  # strongly connected component, so it has no entry.)
+  name_aliases:
+    - name: Cách Mạng Tháng Tám
+      aliases: [Cách Mạng Tháng 8, CMT8]
+    - name: Nam Kỳ Khởi Nghĩa
+      aliases: [NKKN]
+    - name: Nguyễn Thị Minh Khai
+      aliases: [NTMK]
+    - name: Điện Biên Phủ
+      aliases: [ĐBP]
+    - name: Xô Viết Nghệ Tĩnh
+      aliases: [XVNT]
+    - name: Võ Văn Kiệt
+      aliases: [Đại lộ Đông Tây]
+    - name: Công trường Công xã Paris
+      aliases: [Công xã Paris, Quảng trường Công xã Paris]
+    - name: Công trường Lam Sơn
+      aliases: [Quảng trường Lam Sơn]
+    - name: Công trường Mê Linh
+      aliases: [Quảng trường Mê Linh]
+    - name: Ngã sáu Phù Đổng
+      aliases: [Ngã 6 Phù Đổng]
+
+junctions:
+  link_max_m: 80.0
+  median_crossing_max_m: 40.0
+  tiny_edge_max_m: 12.0
+  carriageway_max_separation_m: 40.0
+  split_crossing_link_max_m: 60.0
+  # Reviewed 2026-11-25 (visual review item 90): "Công trường Lam Sơn" is a street about
+  # 200 m long in front of the Opera House, linking Đồng Khởi with Hai Bà Trưng /
+  # Cao Bá Quát; it is not a square that the streets around it all meet at. As a place,
+  # both of its ends became one junction and Cao Bá Quát / Nguyễn Siêu would "meet"
+  # Đồng Khởi, which they do not.
+  street_like_places:
+    - Công trường Lam Sơn
+review_log_path: configs/graphs/hcmc_district1_v3_p2_review.yaml

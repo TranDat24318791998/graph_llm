@@ -1,0 +1,29 @@
+# EXP-002 (Phase 1 follow-up: graph context formats). Protocol: experiments/EXP-002-phase1-graph-context/protocol.md
+experiment_id: EXP-002
+benchmark_version: v0.2
+graph_version: hcmc_district1_v2_p1
+corpus_id: hcmc_district1_v2_p1_text_v1
+lightrag_index_id: hcmc_district1_v2_p1_text_v1_packed_qwen2.5-14b-ctx16k
+answer_llm:
+  base_url: http://127.0.0.1:11434/v1
+  model: qwen2.5-7b-ctx16k
+  temperature: 0.0
+  seed: 0
+  max_tokens: 1024
+  timeout_s: 600.0
+prompt_config_path: configs/prompts/answer_v1.yaml
+embedding_model: bge-m3
+# The same upper bound on context length for M1, M2 and M3 (about 5-6k Qwen tokens).
+context_budget_characters: 16000
+m1_top_k: 30
+m3_hops: 2
+lightrag:
+  mode: mix
+  top_k: 40
+  chunk_top_k: 20
+  max_entity_tokens: 2000
+  max_relation_tokens: 2000
+  max_total_tokens: 8000
+m3t_hops: 2
+question_linker_categories: [regular]
+representations: [M3, M3N, M3T]

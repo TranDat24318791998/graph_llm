@@ -1,0 +1,149 @@
+{
+  "config": {
+    "benchmark_version": "v0.2",
+    "graph_version": "hcmc_district1_v2_p1",
+    "split": "development",
+    "seed": 20261124,
+    "templates": [
+      {
+        "template_id": "L1_oneway",
+        "text": "Đường {street} có phải là đường một chiều không?",
+        "count": 25,
+        "required_phrases": [
+          "một chiều"
+        ]
+      },
+      {
+        "template_id": "L1_length",
+        "text": "Tổng chiều dài đường {street} trong khu vực có lớn hơn {threshold_m} mét không?",
+        "count": 25,
+        "required_phrases": [
+          "lớn hơn",
+          "mét"
+        ]
+      },
+      {
+        "template_id": "L2_neighbours",
+        "text": "Những đường nào giao nhau hoặc nối trực tiếp với đường {street}? Không tính hẻm và đường nội bộ.",
+        "count": 50,
+        "required_phrases": [
+          "hẻm",
+          "nội bộ"
+        ]
+      },
+      {
+        "template_id": "L3_next_on_oneway",
+        "text": "Một xe đang ở giao lộ giữa đường {cross_street} và đường {oneway_street}. Đường {oneway_street} là đường một chiều. Nếu xe đi tiếp theo đường {oneway_street} đúng chiều lưu thông, thì đường đầu tiên mà xe gặp tiếp theo là đường nào? Không tính hẻm và đường nội bộ.",
+        "count": 50,
+        "required_phrases": [
+          "một chiều",
+          "hẻm",
+          "nội bộ"
+        ]
+      },
+      {
+        "template_id": "L4_shortest_route",
+        "text": "Tìm tuyến đường ngắn nhất cho ô tô, tuân thủ đường một chiều, đi từ giao lộ đường {start_a} và đường {start_b} đến giao lộ đường {end_a} và đường {end_b}. Cho biết thứ tự các đường đi qua và tổng chiều dài tuyến đường tính bằng mét.",
+        "count": 50,
+        "required_phrases": [
+          "ngắn nhất",
+          "tuân thủ",
+          "một chiều",
+          "mét"
+        ]
+      },
+      {
+        "template_id": "L5_two_way_neighbours",
+        "text": "Trong các đường giao nhau hoặc nối trực tiếp với đường {street} (không tính hẻm và đường nội bộ), có bao nhiêu đường cho phép xe đi hai chiều trên toàn tuyến?",
+        "count": 25,
+        "required_phrases": [
+          "hai chiều",
+          "hẻm",
+          "nội bộ"
+        ]
+      },
+      {
+        "template_id": "L5_common_neighbours",
+        "text": "Có bao nhiêu đường giao nhau hoặc nối trực tiếp với cả đường {street_a} và đường {street_b}? Không tính hẻm và đường nội bộ.",
+        "count": 25,
+        "required_phrases": [
+          "cả",
+          "hẻm",
+          "nội bộ"
+        ]
+      }
+    ],
+    "paraphrase_instruction": "Viết lại câu hỏi sau bằng tiếng Việt tự nhiên, như một người dân hỏi đường. Giữ nguyên ý nghĩa và mọi điều kiện của câu hỏi.\nGiữ nguyên chính xác tên mọi con đường (không viết tắt, không bỏ dấu, không thêm chữ \"đường\" vào giữa tên).\nChỉ trả về câu hỏi đã viết lại, không giải thích.\n"
+  },
+  "created_at": "2026-11-24T12:53:08.090022Z",
+  "question_count": 250,
+  "counts_by_template": {
+    "L1_oneway": 25,
+    "L1_length": 25,
+    "L2_neighbours": 50,
+    "L3_next_on_oneway": 50,
+    "L4_shortest_route": 50,
+    "L5_two_way_neighbours": 25,
+    "L5_common_neighbours": 25
+  },
+  "paraphrase_model": "qwen2.5-7b-ctx16k",
+  "paraphrase_fallback_question_ids": [
+    "L3_next_on_oneway_001",
+    "L3_next_on_oneway_002",
+    "L3_next_on_oneway_004",
+    "L3_next_on_oneway_010",
+    "L3_next_on_oneway_015",
+    "L3_next_on_oneway_018",
+    "L3_next_on_oneway_021",
+    "L3_next_on_oneway_023",
+    "L3_next_on_oneway_033",
+    "L3_next_on_oneway_040",
+    "L3_next_on_oneway_044",
+    "L4_shortest_route_001",
+    "L4_shortest_route_002",
+    "L4_shortest_route_003",
+    "L4_shortest_route_004",
+    "L4_shortest_route_005",
+    "L4_shortest_route_006",
+    "L4_shortest_route_007",
+    "L4_shortest_route_008",
+    "L4_shortest_route_009",
+    "L4_shortest_route_011",
+    "L4_shortest_route_012",
+    "L4_shortest_route_013",
+    "L4_shortest_route_015",
+    "L4_shortest_route_016",
+    "L4_shortest_route_017",
+    "L4_shortest_route_018",
+    "L4_shortest_route_019",
+    "L4_shortest_route_020",
+    "L4_shortest_route_021",
+    "L4_shortest_route_022",
+    "L4_shortest_route_023",
+    "L4_shortest_route_024",
+    "L4_shortest_route_025",
+    "L4_shortest_route_026",
+    "L4_shortest_route_027",
+    "L4_shortest_route_028",
+    "L4_shortest_route_029",
+    "L4_shortest_route_030",
+    "L4_shortest_route_031",
+    "L4_shortest_route_032",
+    "L4_shortest_route_033",
+    "L4_shortest_route_035",
+    "L4_shortest_route_036",
+    "L4_shortest_route_037",
+    "L4_shortest_route_039",
+    "L4_shortest_route_040",
+    "L4_shortest_route_041",
+    "L4_shortest_route_042",
+    "L4_shortest_route_043",
+    "L4_shortest_route_044",
+    "L4_shortest_route_045",
+    "L4_shortest_route_046",
+    "L4_shortest_route_047",
+    "L4_shortest_route_048",
+    "L4_shortest_route_049"
+  ],
+  "questions_sha256": "a66d5f57294c092d51810f0a9171f1e638ba4be9409e83426a271a80c3ad3433"
+}

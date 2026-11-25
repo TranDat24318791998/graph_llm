@@ -32,3 +32,6 @@ A run id has the form `<experiment_id>_<representation>_<model>_<timestamp>`, fo
 
 | ID | Title | Research question | Status |
 |---|---|---|---|
+| EXP-001 | Phase 1 pilot: M0-M3 on 250 questions (graph v1) | RQ1 (RQ2, RQ3 first evidence) | pipeline trial (graph v1 superseded) |
+| EXP-002 | Phase 1 follow-up: graph context formats (M3, M3N, M3T) | RQ1, RQ2, towards RQ4 | abandoned (superseded by EXP-003 before any run) |
+| EXP-003 | Phase 1 main comparison on reference graph v2: M0, M1, M2, M3, M3N, M3T | RQ1 (RQ2, RQ3, RQ4 first evidence) | approved |

@@ -1,0 +1,8 @@
+# qwen2.5:7b (Q4_K_M) on local Ollama, as the variant qwen2.5-7b-ctx16k with num_ctx 16384:
+#   ollama create qwen2.5-7b-ctx16k  with a Modelfile "FROM qwen2.5:7b / PARAMETER num_ctx 16384"
+base_url: http://127.0.0.1:11434/v1
+model: qwen2.5-7b-ctx16k
+temperature: 0.0
+seed: 0
+max_tokens: 1024
+timeout_s: 600.0

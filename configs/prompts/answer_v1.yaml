@@ -1,0 +1,20 @@
+# Answering prompt shared by every representation (M0-M3). Only {context} differs.
+prompt_version: answer_v1
+system: |
+  Bạn là trợ lý trả lời câu hỏi về mạng lưới đường ô tô ở trung tâm Thành phố Hồ Chí Minh.
+  Hãy dựa vào phần THÔNG TIN được cung cấp. Nếu thông tin không đủ, hãy dựa vào hiểu biết của bạn và vẫn đưa ra câu trả lời tốt nhất.
+  Chỉ trả về đúng một đối tượng JSON theo định dạng được yêu cầu, không giải thích thêm.
+user: |
+  THÔNG TIN:
+  {context}
+
+  CÂU HỎI: {question}
+
+  ĐỊNH DẠNG TRẢ LỜI: {answer_format}
+empty_context: "(Không có thông tin nào được cung cấp.)"
+answer_formats:
+  boolean: '{"answer": true} hoặc {"answer": false}'
+  number: '{"answer": <một số>}'
+  street_name: '{"answer": "<tên một con đường>"}'
+  street_set: '{"answer": ["<tên đường>", "<tên đường>", ...]}'
+  route: '{"streets": ["<tên đường thứ nhất>", "<tên đường tiếp theo>", ...], "length_m": <tổng chiều dài tính bằng mét>}'

@@ -5,6 +5,10 @@ description = "Controlled comparison of graph representations for LLM question a
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "folium>=1.0.0",
+    "lightrag-hku>=1.5.8",
+    "numpy>=2.5.5",
+    "openai>=3.58.0",
     "osmnx>=2.1.2",
     "pydantic>=2.7",
     "pyyaml>=6.0.3",
@@ -60,3 +64,7 @@ files = ["src", "tests"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+
+[[tool.mypy.overrides]]
+module = ["lightrag", "lightrag.*", "folium", "folium.*", "branca", "branca.*"]
+ignore_missing_imports = true

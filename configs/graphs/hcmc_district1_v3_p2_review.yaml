@@ -1,0 +1,4226 @@
+# Review decisions for graph hcmc_district1_v3_p2 (docs/graph_v2_design.md, Section 4).
+# One decision per regular street card and per junction card of docs/reports/graph_review_hcmc_district1_v3_p2.md.
+# How the decisions were made (2026-11-25):
+# - Every card was generated with automatic flags (graph/review.py).
+# - The 118 cards with geometric flags (dead ends, pieces, short or isolated streets,
+#   divided-road imbalance, wide / many-node / connector / place-split / meet-without-shared-node
+#   junctions) were checked on screenshots of the street base map and satellite imagery.
+#   Junction findings (one square split in two, a street-like square, crossings split into
+#   several junctions) were fixed by rules, not overrides: one junction per place, merging of
+#   split crossings, and "Công trường Lam Sơn" treated as a street (street_like_places).
+# - The 17 junction cards produced by the merge rule were checked in a second visual pass:
+#   all 17 consistent (one real crossing each).
+# - Streets whose OSM data visibly disagrees with reality, or whose images were not conclusive,
+#   are excluded from questions (owner decision Q-A); they stay in the graph for routing.
+# - Cards without flags are accepted on the automatic checks; the owner audit samples them.
+# A card whose facts or flags change in a later build must be reviewed again.
+graph_version: hcmc_district1_v3_p2
+reviewer: Claude (delegated by the owner, 2026-11-25); visual review of flagged geometry by a Claude subagent;
+  owner audit pending
+decisions:
+- item_id: alexandre-de-rhodes
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 317 m, meets 3 regular streets.
+- item_id: an-duong-vuong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 376 m, meets 2 regular streets.
+- item_id: ba-huyen-thanh-quan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 1429 m, meets 13 regular streets.
+- item_id: ba-le-chan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 193 m, meets 3 regular streets.
+- item_id: ban-co
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 171 m, meets 1 regular streets.
+- item_id: bui-thi-xuan
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''suspicious'': Bùi Thị Xuân stops at the south-west edge of Cách Mạng
+    Tháng Tám. Satellite and base map show CMT8 here as a wide road with two directions, but our graph
+    has only one one-way (north-west-bound) carriageway on the north-east edge; the south-east-bound carriageway,
+    where Bùi Thị Xuân (and Sương Nguyệt Anh, item 33) actually join, is missing. Excluded from questions
+    (decision Q-A); the street stays in the graph for routing.'
+- item_id: bui-vien
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 634 m, meets 4 regular streets.
+- item_id: ben-chuong-duong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 173 m, meets 1 regular streets.
+- item_id: ben-van-don
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 2398 m, meets 10 regular streets.
+- item_id: calmette
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 420 m, divided 159
+    m, one-way 75 m (one-way share of edge length 6%)); mixed streets are not used for direction questions.'
+- item_id: cao-ba-nha
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 224 m, meets 2 regular streets.
+- item_id: cao-ba-quat
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 190 m, meets 5 regular streets.
+- item_id: cao-thang
+  decision: accepted
+  flags_seen:
+  - S-DIVIDED-IMBALANCE
+  reason: 'S-DIVIDED-IMBALANCE: carriageway difference confirmed as plausible (ramp or bridge on one side;
+    visual review).'
+- item_id: chu-manh-trinh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 390 m, meets 4 regular streets.
+- item_id: cach-mang-thang-tam
+  decision: excluded_from_questions
+  flags_seen:
+  - S-MIXED
+  reason: 'OSM gap: Bùi Thị Xuân and Sương Nguyệt Anh end about 20 m short of Cách Mạng Tháng Tám, and
+    only one of its carriageways is mapped between Nguyễn Thị Minh Khai and Ngã sáu Phù Đổng (visual review
+    items 0 and 33; Overpass shows a single one-way way 818385418 there), so its list of meeting streets
+    disagrees with reality. Excluded from questions (decision Q-A).'
+- item_id: cay-diep
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 308 m, meets 5 regular streets.
+- item_id: co-bac-2
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: co-giang-2
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: cong-truong-lam-son
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 0 m, divided 67 m,
+    one-way 328 m (one-way share of edge length 71%)); mixed streets are not used for direction questions.'
+- item_id: cu-lao
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 209 m, meets 2 regular streets.
+- item_id: cau-bong
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: cau-bui-huu-nghia
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 117 m, meets 2 regular streets.
+- item_id: cau-calmette
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 548 m, meets 4 regular streets.
+- item_id: cau-cong-ly
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 182 m, meets 2 regular streets.
+- item_id: cau-dua
+  decision: excluded_from_questions
+  flags_seen:
+  - S-PIECES
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''suspicious'': At zoom 19 the two Cầu Dừa pieces sit on either side
+    of the small creek mouth south of Bến Vân Đồn; the base map draws the lane continuing across the creek,
+    but our graph has no edge over it, so the bridge itself (the thing the street is named after) is missing
+    and both pieces end at the water. Excluded from questions (decision Q-A); the street stays in the
+    graph for routing.'
+- item_id: cau-hoang-hoa-tham
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 269 m, meets 2 regular streets.
+- item_id: cau-khanh-hoi
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 334 m, meets 2 regular streets.
+- item_id: cau-kieu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 140 m, meets 2 regular streets.
+- item_id: cau-le-van-sy
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  reason: 'S-SHORT: short named street confirmed (visual review).'
+- item_id: cau-so-9
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 70 m, meets 2 regular streets.
+- item_id: cau-thi-nghe-1
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: cau-thi-nghe-2
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: cau-tran-khanh-du
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 65 m, meets 2 regular streets.
+- item_id: cau-ong-lanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 613 m, meets 2 regular streets.
+- item_id: cau-dien-bien-phu-1
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 149 m, meets 1 regular streets.
+- item_id: cau-dien-bien-phu-2
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 147 m, meets 2 regular streets.
+- item_id: cong-quynh
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 759 m, divided 180
+    m, one-way 9 m (one-way share of edge length 0%)); mixed streets are not used for direction questions.'
+- item_id: dien-hong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 331 m, meets 1 regular streets.
+- item_id: duy-tan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 163 m, meets 1 regular streets.
+- item_id: da-cau-thi-nghe-2
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 188 m, meets 1 regular streets.
+- item_id: dan-cau-calmette
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  - S-PIECES
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 0 m, divided 0 m,
+    one-way 835 m (one-way share of edge length 100%)); mixed streets are not used for direction questions;
+    S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park (visual
+    review).'
+- item_id: hai-ba-trung
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 2278 m, divided 549
+    m, one-way 23 m (one-way share of edge length 0%)); mixed streets are not used for direction questions.'
+- item_id: hoa-hong
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: hoa-su
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 82 m, meets 2 regular streets.
+- item_id: hoang-dieu
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: hoang-sa
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 4260 m, divided 441
+    m, one-way 339 m (one-way share of edge length 3%)); mixed streets are not used for direction questions.'
+- item_id: huyen-quang
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 102 m, meets 2 regular streets.
+- item_id: huyen-tran-cong-chua
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 453 m, meets 3 regular streets.
+- item_id: huynh-khuong-ninh
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 174 m, divided 0 m,
+    one-way 70 m (one-way share of edge length 17%)); mixed streets are not used for direction questions.'
+- item_id: huynh-man-dat
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 298 m, meets 6 regular streets.
+- item_id: huynh-thuc-khang
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 83 m, divided 0 m,
+    one-way 542 m (one-way share of edge length 77%)); mixed streets are not used for direction questions.'
+- item_id: huynh-tinh-cua-1
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: huynh-tinh-cua-2
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: huynh-van-banh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 385 m, meets 3 regular streets.
+- item_id: ham-nghi
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 1331 m, meets 13 regular streets.
+- item_id: han-thuyen
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 288 m, meets 5 regular streets.
+- item_id: hoa-my
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''unclear'': At zoom 19 Hòa Mỹ ends where the street narrows; the base
+    map shows a narrow lane continuing south that links the ends of Hòa Mỹ, Phan Ngữ and Phan Tôn (all
+    three are flagged dead ends 15-25 m apart), while satellite shows only dense roofs. Excluded from
+    questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: hai-trieu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 169 m, meets 2 regular streets.
+- item_id: ho-huan-nghiep
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 136 m, meets 6 regular streets.
+- item_id: ho-hao-hon
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 459 m, divided 0 m,
+    one-way 25 m (one-way share of edge length 3%)); mixed streets are not used for direction questions.'
+- item_id: ho-tung-mau
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 419 m, divided 23
+    m, one-way 78 m (one-way share of edge length 8%)); mixed streets are not used for direction questions.'
+- item_id: ho-xuan-huong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 455 m, meets 4 regular streets.
+- item_id: khanh-hoi
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 252 m, divided 487
+    m, one-way 35 m (one-way share of edge length 2%)); mixed streets are not used for direction questions.'
+- item_id: ky-con
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 605 m, meets 7 regular streets.
+- item_id: ky-dong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 591 m, meets 4 regular streets.
+- item_id: le-anh-xuan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 158 m, meets 3 regular streets.
+- item_id: le-cong-kieu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 184 m, meets 3 regular streets.
+- item_id: le-duan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 1353 m, meets 11 regular streets.
+- item_id: le-lai
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 26 m, divided 148
+    m, one-way 885 m (one-way share of edge length 72%)); mixed streets are not used for direction questions.'
+- item_id: le-loi
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 1129 m, meets 12 regular streets.
+- item_id: le-ngo-cat
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 189 m, meets 2 regular streets.
+- item_id: le-quy-don-1
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  - S-SHARED-NAME
+  - S-ISOLATED
+  reason: 'S-SHORT: short named street confirmed (visual review); S-SHARED-NAME: another street in the
+    area has the same name (separated by a reviewed override); not askable because the name is ambiguous;
+    S-ISOLATED: isolated short piece (visual review).'
+- item_id: le-quy-don-2
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: le-quoc-hung
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 563 m, meets 4 regular streets.
+- item_id: le-thanh-ton
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 1755 m, meets 17 regular streets.
+- item_id: le-thach
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 181 m, meets 4 regular streets.
+- item_id: le-thi-hong-gam
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 510 m, meets 6 regular streets.
+- item_id: le-thi-rieng
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 463 m, meets 7 regular streets.
+- item_id: le-van-duyet
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 283 m, meets 2 regular streets.
+- item_id: le-van-huu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 155 m, meets 2 regular streets.
+- item_id: le-van-linh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 338 m, meets 4 regular streets.
+- item_id: le-van-sy
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 95 m, meets 2 regular streets.
+- item_id: ly-chinh-thang
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 176 m, divided 0 m,
+    one-way 1482 m (one-way share of edge length 81%)); mixed streets are not used for direction questions.'
+- item_id: ly-thai-to
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  reason: 'S-SHORT: short named street confirmed (visual review).'
+- item_id: ly-tu-trong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 1841 m, meets 17 regular streets.
+- item_id: ly-van-phuc
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 197 m, meets 2 regular streets.
+- item_id: luu-van-lang
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 144 m, meets 2 regular streets.
+- item_id: luong-huu-khanh
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: mai-thi-luu
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: me-linh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 230 m, meets 3 regular streets.
+- item_id: mac-thi-buoi
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 288 m, meets 4 regular streets.
+- item_id: mac-dinh-chi
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 89 m, divided 0 m,
+    one-way 835 m (one-way share of edge length 82%)); mixed streets are not used for direction questions.'
+- item_id: nam-ky-khoi-nghia
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 14 m, divided 1453
+    m, one-way 2095 m (one-way share of edge length 42%)); mixed streets are not used for direction questions.'
+- item_id: nam-quoc-cang
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 195 m, meets 2 regular streets.
+- item_id: nguyen-an-ninh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 144 m, meets 2 regular streets.
+- item_id: nguyen-bieu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 358 m, meets 3 regular streets.
+- item_id: nguyen-binh-khiem
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  - S-PIECES
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 405 m, divided 0 m,
+    one-way 959 m (one-way share of edge length 54%)); mixed streets are not used for direction questions;
+    S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park (visual
+    review).'
+- item_id: nguyen-cong-tru-2
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: nguyen-cu-trinh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 726 m, meets 5 regular streets.
+- item_id: nguyen-canh-chan
+  decision: excluded_from_questions
+  flags_seen:
+  - S-MIXED
+  - S-PIECES
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''suspicious'': Focus 0: a short Nguyễn Cảnh Chân stub ends on the north-west
+    side of Trần Hưng Đạo. Focus 1 (zoom 19): the north-west piece from Nguyễn Trãi ends mid-block while
+    the base map draws "Đường Nguyễn Cảnh Chân" continuing straight south-east to Trần Hưng Đạo; about
+    150 m of the street between the two pieces is missing from our graph. Excluded from questions (decision
+    Q-A); the street stays in the graph for routing.'
+- item_id: nguyen-du
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 73 m, divided 0 m,
+    one-way 1849 m (one-way share of edge length 93%)); mixed streets are not used for direction questions.'
+- item_id: nguyen-gia-thieu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 175 m, meets 2 regular streets.
+- item_id: nguyen-huy-tu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 149 m, meets 5 regular streets.
+- item_id: nguyen-hue
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 0 m, divided 644 m,
+    one-way 311 m (one-way share of edge length 19%)); mixed streets are not used for direction questions.'
+- item_id: nguyen-huu-canh
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: nguyen-huu-cau
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 324 m, meets 5 regular streets.
+- item_id: nguyen-huu-hao
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 515 m, meets 3 regular streets.
+- item_id: nguyen-khoai
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 355 m, meets 1 regular streets.
+- item_id: nguyen-khac-nhu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 318 m, meets 4 regular streets.
+- item_id: nguyen-ngoc-phuong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 496 m, meets 5 regular streets.
+- item_id: nguyen-phi-khanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 481 m, meets 7 regular streets.
+- item_id: nguyen-phuc-nguyen
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 250 m, meets 4 regular streets.
+- item_id: nguyen-sieu
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 276 m, divided 0 m,
+    one-way 265 m (one-way share of edge length 32%)); mixed streets are not used for direction questions.'
+- item_id: nguyen-son-ha
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: nguyen-thiep
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 97 m, meets 2 regular streets.
+- item_id: nguyen-thanh-y
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: nguyen-thai-binh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 578 m, meets 6 regular streets.
+- item_id: nguyen-thai-hoc
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 717 m, meets 11 regular streets.
+- item_id: nguyen-thong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 915 m, meets 9 regular streets.
+- item_id: nguyen-thuong-hien
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 737 m, divided 0 m,
+    one-way 210 m (one-way share of edge length 12%)); mixed streets are not used for direction questions.'
+- item_id: nguyen-thi-dieu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 418 m, meets 3 regular streets.
+- item_id: nguyen-thi-minh-khai
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 404 m, divided 1125
+    m, one-way 2345 m (one-way share of edge length 43%)); mixed streets are not used for direction questions.'
+- item_id: nguyen-thi-nghia
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 266 m, meets 8 regular streets.
+- item_id: nguyen-trung-ngan
+  decision: excluded_from_questions
+  flags_seen:
+  - S-PIECES
+  reason: 'Visual review verdict ''unclear'': Only one Nguyễn Trung Ngạn segment is drawn, from Chu Mạnh
+    Trinh to Tôn Đức Thắng; the second piece is not identifiable in the images. The base map labels the
+    street continuing north-east of Tôn Đức Thắng toward the Ba Son area. Excluded from questions (decision
+    Q-A); the street stays in the graph for routing.'
+- item_id: nguyen-trung-truc
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 410 m, meets 5 regular streets.
+- item_id: nguyen-trai
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 2108 m, meets 18 regular streets.
+- item_id: nguyen-truong-to-1
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  - S-SHARED-NAME
+  reason: 'Visual review verdict ''unclear'': Nguyễn Trường Tộ (Phú Nhuận, Phường 17) ends about 20 m
+    short of a base-map street labelled "Đường Cao Thắng" that is absent from our graph (neither street
+    nor alley). Satellite shows the area as dense housing with only narrow lanes, so the absent street
+    may be alley-width. Excluded from questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: nguyen-truong-to-2
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: nguyen-tat-thanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 1218 m, meets 8 regular streets.
+- item_id: nguyen-van-chiem
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 184 m, meets 2 regular streets.
+- item_id: nguyen-van-cu
+  decision: excluded_from_questions
+  flags_seen:
+  - S-DIVIDED-IMBALANCE
+  reason: 'Visual review verdict ''unclear'': At the focus (An Dương Vương junction) Nguyễn Văn Cừ is
+    drawn as a tight pair of one-way carriageways; the images do not show where the 700 m length difference
+    arises (plausibly where the carriageways separate toward the Nguyễn Văn Cừ bridge ramps south of Võ
+    Văn Kiệt). Excluded from questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: nguyen-van-giai
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  - S-DIVIDED-IMBALANCE
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 209 m, divided 27
+    m, one-way 38 m (one-way share of edge length 8%)); mixed streets are not used for direction questions;
+    S-DIVIDED-IMBALANCE: carriageway difference confirmed as plausible (ramp or bridge on one side; visual
+    review).'
+- item_id: nguyen-van-lac
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 406 m, meets 6 regular streets.
+- item_id: nguyen-van-mai
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 193 m, meets 2 regular streets.
+- item_id: nguyen-van-nguyen
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''unclear'': Nguyễn Văn Nguyễn ends a few metres north of Trần Khánh
+    Dư; the base map labels a narrow lane continuing north to Hoàng Sa with the same name, but satellite
+    shows it alley-width and tree-covered. Excluded from questions (decision Q-A); the street stays in
+    the graph for routing.'
+- item_id: nguyen-van-thu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 1083 m, meets 10 regular streets.
+- item_id: nguyen-van-trang
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 239 m, meets 3 regular streets.
+- item_id: nguyen-van-troi
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 0 m, divided 0 m,
+    one-way 254 m (one-way share of edge length 100%)); mixed streets are not used for direction questions.'
+- item_id: nguyen-dinh-chieu
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 622 m, divided 0 m,
+    one-way 3107 m (one-way share of edge length 71%)); mixed streets are not used for direction questions.'
+- item_id: ngo-thoi-nhiem
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 1030 m, meets 9 regular streets.
+- item_id: ngo-tat-to
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 390 m, meets 3 regular streets.
+- item_id: ngo-van-nam
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 299 m, meets 3 regular streets.
+- item_id: ngo-van-so
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: ngo-duc-ke
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: pasteur
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 80 m, divided 0 m,
+    one-way 2621 m (one-way share of edge length 94%)); mixed streets are not used for direction questions.'
+- item_id: phan-boi-chau
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 13 m, divided 0 m,
+    one-way 153 m (one-way share of edge length 85%)); mixed streets are not used for direction questions.'
+- item_id: phan-chu-trinh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 151 m, meets 9 regular streets.
+- item_id: phan-huy-on
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 190 m, meets 5 regular streets.
+- item_id: phan-ke-binh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 310 m, meets 3 regular streets.
+- item_id: phan-liem
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 250 m, meets 3 regular streets.
+- item_id: phan-ngu
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''unclear'': Phan Ngữ ends about 15 m short of the Hòa Mỹ end; the base
+    map shows a narrow lane continuing north-west to Hòa Mỹ, alley-width, not visible on satellite (same
+    cluster as items 11 and 31). Excluded from questions (decision Q-A); the street stays in the graph
+    for routing.'
+- item_id: phan-ton
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''unclear'': Phan Tôn ends at the north-west; the base map labels the
+    narrow continuation "Đường Phan Tôn" and draws it reaching the Hòa Mỹ end, but it is alley-width (same
+    cluster as items 11 and 30). Excluded from questions (decision Q-A); the street stays in the graph
+    for routing.'
+- item_id: phan-van-han
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 581 m, divided 0 m,
+    one-way 258 m (one-way share of edge length 18%)); mixed streets are not used for direction questions.'
+- item_id: phan-van-truong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 137 m, meets 2 regular streets.
+- item_id: phan-van-tri
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''unclear'': Phan Văn Trị ends mid-block west of Nguyễn Biểu; the base
+    map shows a narrower lane continuing west-south-west toward Trần Bình Trọng, which looks alley-width.
+    Excluded from questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: phan-van-dat
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 120 m, meets 6 regular streets.
+- item_id: phan-dinh-phung
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 648 m, meets 5 regular streets.
+- item_id: pho-duc-chinh
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 475 m, divided 0 m,
+    one-way 60 m (one-way share of edge length 6%)); mixed streets are not used for direction questions.'
+- item_id: phung-khac-khoan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 623 m, meets 5 regular streets.
+- item_id: pham-hong-thai
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 344 m, meets 9 regular streets.
+- item_id: pham-khac
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 309 m, meets 2 regular streets.
+- item_id: pham-ngu-lao
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 308 m, divided 0 m,
+    one-way 754 m (one-way share of edge length 55%)); mixed streets are not used for direction questions.'
+- item_id: pham-ngoc-thach
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 1004 m, meets 11 regular streets.
+- item_id: pham-viet-chanh-1
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: pham-viet-chanh-2
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: pham-dinh-toai
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 126 m, meets 2 regular streets.
+- item_id: rach-bung-binh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 350 m, meets 3 regular streets.
+- item_id: su-thien-chieu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 177 m, meets 2 regular streets.
+- item_id: suong-nguyet-anh
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''suspicious'': Sương Nguyệt Anh ends ~20 m short of our Cách Mạng Tháng
+    Tám line. Satellite shows CMT8 as a wide two-direction road and our one-way line runs only along its
+    north-east edge; Sương Nguyệt Anh reaches the missing south-west (south-east-bound) carriageway. Excluded
+    from questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: thi-sach
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 495 m, meets 9 regular streets.
+- item_id: thai-van-lung
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  - S-INNER-DEAD-END
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 227 m, divided 0 m,
+    one-way 190 m (one-way share of edge length 30%)); mixed streets are not used for direction questions;
+    S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: thach-thi-thanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 330 m, meets 4 regular streets.
+- item_id: thu-khoa-huan
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 106 m, divided 0 m,
+    one-way 147 m (one-way share of edge length 41%)); mixed streets are not used for direction questions.'
+- item_id: truong-han-sieu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 165 m, meets 2 regular streets.
+- item_id: truong-quyen
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 250 m, meets 2 regular streets.
+- item_id: truong-dinh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 2310 m, meets 19 regular streets.
+- item_id: truong-sa
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  - S-PIECES
+  - S-INNER-DEAD-END
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 5241 m, divided 249
+    m, one-way 57 m (one-way share of edge length 1%)); mixed streets are not used for direction questions;
+    S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park (visual
+    review); S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: tran-binh-trong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 571 m, meets 3 regular streets.
+- item_id: tran-cao-van
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 130 m, divided 0 m,
+    one-way 265 m (one-way share of edge length 50%)); mixed streets are not used for direction questions.'
+- item_id: tran-doan-khanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 78 m, meets 2 regular streets.
+- item_id: tran-hung-dao
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 3744 m, meets 23 regular streets.
+- item_id: tran-khanh-du
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 448 m, meets 3 regular streets.
+- item_id: tran-khac-chan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 398 m, meets 6 regular streets.
+- item_id: tran-nguyen-dan
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: tran-nhat-duat
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 408 m, meets 7 regular streets.
+- item_id: tran-quang-khai
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  - S-DIVIDED-IMBALANCE
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 741 m, divided 139
+    m, one-way 55 m (one-way share of edge length 3%)); mixed streets are not used for direction questions;
+    S-DIVIDED-IMBALANCE: carriageway difference confirmed as plausible (ramp or bridge on one side; visual
+    review).'
+- item_id: tran-quang-long
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 283 m, meets 2 regular streets.
+- item_id: tran-quy-khoach
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 242 m, meets 2 regular streets.
+- item_id: tran-quoc-thao
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 1425 m, meets 11 regular streets.
+- item_id: tran-quoc-toan
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 671 m, divided 0 m,
+    one-way 219 m (one-way share of edge length 14%)); mixed streets are not used for direction questions.'
+- item_id: tran-dinh-xu
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''unclear'': Trần Đình Xu crosses both Võ Văn Kiệt carriageways and ends
+    a few metres beyond, at a canal-side lane the base map labels "Đường Võ Văn Kiệt" that is not in our
+    graph. Excluded from questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: trinh-van-can
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 154 m, meets 2 regular streets.
+- item_id: ton-that-thiep
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 235 m, meets 4 regular streets.
+- item_id: ton-that-tung
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: ton-that-dam
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: ton-dan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 869 m, meets 4 regular streets.
+- item_id: ton-duc-thang
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 0 m, divided 1028
+    m, one-way 832 m (one-way share of edge length 29%)); mixed streets are not used for direction questions.'
+- item_id: tu-xuong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 1104 m, meets 7 regular streets.
+- item_id: vo-thi-sau
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 11 m, divided 0 m,
+    one-way 2340 m (one-way share of edge length 99%)); mixed streets are not used for direction questions.'
+- item_id: vo-van-kiet
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  - S-DIVIDED-IMBALANCE
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 167 m, divided 1847
+    m, one-way 1827 m (one-way share of edge length 31%)); mixed streets are not used for direction questions;
+    S-DIVIDED-IMBALANCE: carriageway difference confirmed as plausible (ramp or bridge on one side; visual
+    review).'
+- item_id: vo-van-tan
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 794 m, divided 0 m,
+    one-way 1210 m (one-way share of edge length 43%)); mixed streets are not used for direction questions.'
+- item_id: vinh-hoi
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: vinh-khanh
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 993 m, divided 58
+    m, one-way 148 m (one-way share of edge length 7%)); mixed streets are not used for direction questions.'
+- item_id: vu-huy-tan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 495 m, meets 7 regular streets.
+- item_id: xom-chieu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 628 m, meets 2 regular streets.
+- item_id: xo-viet-nghe-tinh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 863 m, meets 6 regular streets.
+- item_id: yersin
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 565 m, divided 0 m,
+    one-way 82 m (one-way share of edge length 7%)); mixed streets are not used for direction questions.'
+- item_id: dinh-cong-trang
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 249 m, meets 2 regular streets.
+- item_id: dinh-le
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 70 m, meets 2 regular streets.
+- item_id: dinh-tien-hoang
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 0 m, divided 215 m,
+    one-way 989 m (one-way share of edge length 70%)); mixed streets are not used for direction questions.'
+- item_id: dien-bien-phu
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  - S-PIECES
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 75 m, divided 387
+    m, one-way 2825 m (one-way share of edge length 75%)); mixed streets are not used for direction questions;
+    S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park (visual
+    review).'
+- item_id: doan-nhu-hai
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 222 m, meets 2 regular streets.
+- item_id: doan-van-bo
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 715 m, divided 297
+    m, one-way 479 m (one-way share of edge length 19%)); mixed streets are not used for direction questions.'
+- item_id: dao-duy-tu
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''unclear'': Đào Duy Từ ends just south of the Nguyễn Trường Tộ junction;
+    the base map draws a lane continuing south-west to "Đường Ngô Thời Nhiệm", which is absent from our
+    graph, but satellite shows it alley-width between houses. Excluded from questions (decision Q-A);
+    the street stays in the graph for routing.'
+- item_id: dong-du
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 294 m, meets 3 regular streets.
+- item_id: 10a
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: 10b
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  reason: 'S-SHORT: short named street confirmed (visual review).'
+- item_id: 10c
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 70 m, meets 3 regular streets.
+- item_id: 12a
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 129 m, meets 2 regular streets.
+- item_id: '24'
+  decision: excluded_from_questions
+  flags_seen:
+  - S-SHORT
+  reason: 'Visual review verdict ''unclear'': Đường 24 is a 7 m named fragment in the knot where Đường
+    Số 1 meets Vĩnh Hội near Đường Số 24 (with the equally tiny Đường số 19 and Đường số 23); the base
+    map shows only Đường Số 24 running south from Vĩnh Hội and no separate "Đường 24". Excluded from questions
+    (decision Q-A); the street stays in the graph for routing.'
+- item_id: bui-huu-nghia
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 195 m, meets 1 regular streets.
+- item_id: co-bac-1
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  - S-SHARED-NAME
+  reason: 'Visual review verdict ''unclear'': Đường Cô Bắc (Phú Nhuận stub off Phan Đình Phùng) ends where
+    the base map shows a narrow lane curving east; satellite shows only a narrow passage between houses.
+    Excluded from questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: co-giang-1
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: hoa-lan
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 170 m, meets 2 regular streets.
+- item_id: hoa-phuong
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 275 m, meets 2 regular streets.
+- item_id: nguyen-cong-hoan
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  - S-DIVIDED-IMBALANCE
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 6 m, divided 93 m,
+    one-way 44 m (one-way share of edge length 18%)); mixed streets are not used for direction questions;
+    S-DIVIDED-IMBALANCE: carriageway difference confirmed as plausible (ramp or bridge on one side; visual
+    review).'
+- item_id: nguyen-cong-tru-1
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: nguyen-cuu-van
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 572 m, meets 2 regular streets.
+- item_id: nguyen-hien
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 251 m, meets 5 regular streets.
+- item_id: nguyen-thien-thuat
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 313 m, meets 2 regular streets.
+- item_id: so-1
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 210 m, meets 12 regular streets.
+- item_id: so-1-cu-xa-do-thanh
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: so-10
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 84 m, meets 4 regular streets.
+- item_id: so-11-2
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  - S-SHARED-NAME
+  reason: 'Visual review verdict ''unclear'': Đường Số 11 ends at the corner where the base map draws
+    "Đường Số 13" continuing north-west; our graph has Đường Số 13 only south-east of this point. Satellite
+    shows dense roofs with no clearly visible road along that line. Excluded from questions (decision
+    Q-A); the street stays in the graph for routing.'
+- item_id: so-12
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 63 m, meets 2 regular streets.
+- item_id: so-13-1
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: so-13-2
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: so-14
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 88 m, meets 3 regular streets.
+- item_id: so-15
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 75 m, meets 2 regular streets.
+- item_id: so-16-1
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  - S-SHARED-NAME
+  reason: 'S-SHORT: short named street confirmed (visual review); S-SHARED-NAME: another street in the
+    area has the same name (separated by a reviewed override); not askable because the name is ambiguous.'
+- item_id: so-16-2
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  - S-SHARED-NAME
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review); S-SHARED-NAME:
+    another street in the area has the same name (separated by a reviewed override); not askable because
+    the name is ambiguous.'
+- item_id: so-18
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 90 m, meets 5 regular streets.
+- item_id: so-2
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: so-2-cu-xa-do-thanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 282 m, meets 4 regular streets.
+- item_id: so-20
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  - S-SHORT
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review); S-SHORT: short named street confirmed (visual review).'
+- item_id: so-22
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 63 m, meets 3 regular streets.
+- item_id: so-24
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 62 m, meets 3 regular streets.
+- item_id: so-28
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 122 m, meets 7 regular streets.
+- item_id: so-3
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  reason: 'S-SHORT: short named street confirmed (visual review).'
+- item_id: so-3-cu-xa-do-thanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 284 m, meets 4 regular streets.
+- item_id: so-30
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: so-31
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 127 m, meets 3 regular streets.
+- item_id: so-32
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: so-33
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  reason: 'S-SHORT: short named street confirmed (visual review).'
+- item_id: so-38
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: so-4
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: so-4-cu-xa-do-thanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 287 m, meets 3 regular streets.
+- item_id: so-40
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: so-42
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: so-44
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  - S-SHORT
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review); S-SHORT:
+    short named street confirmed (visual review).'
+- item_id: so-48
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 553 m, meets 2 regular streets.
+- item_id: so-5
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  reason: 'S-SHORT: short named street confirmed (visual review).'
+- item_id: so-5-cu-xa-do-thanh
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  reason: 'S-SHORT: short named street confirmed (visual review).'
+- item_id: so-51
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 133 m, meets 3 regular streets.
+- item_id: so-6
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 301 m, meets 8 regular streets.
+- item_id: so-6-cu-xa-do-thanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 72 m, meets 2 regular streets.
+- item_id: so-7
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  reason: 'S-SHORT: short named street confirmed (visual review).'
+- item_id: so-7-cu-xa-do-thanh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 62 m, meets 2 regular streets.
+- item_id: so-8
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 63 m, meets 5 regular streets.
+- item_id: so-9
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 70 m, meets 6 regular streets.
+- item_id: tran-van-khe
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 463 m, meets 3 regular streets.
+- item_id: tan-vinh
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 590 m, meets 19 regular streets.
+- item_id: vuon-chuoi
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 423 m, meets 6 regular streets.
+- item_id: van-kiep
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 104 m, meets 4 regular streets.
+- item_id: so-11-1
+  decision: accepted
+  flags_seen:
+  - S-SHARED-NAME
+  reason: 'S-SHARED-NAME: another street in the area has the same name (separated by a reviewed override);
+    not askable because the name is ambiguous.'
+- item_id: so-19
+  decision: excluded_from_questions
+  flags_seen:
+  - S-SHORT
+  reason: 'Visual review verdict ''unclear'': Đường số 19 is a 3 m fragment at the knot where Đường Số
+    1 turns south into Đường Số 24 (with Đường 24 and Đường số 23 fragments). The base map draws Đường
+    Số 19, 21, 23 and 39 as narrow lanes running north from this corner, and none of them is in our graph
+    (not even as alleys). Excluded from questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: so-23
+  decision: excluded_from_questions
+  flags_seen:
+  - S-SHORT
+  reason: 'Visual review verdict ''unclear'': Đường số 23 is a 25 m fragment at the same Đường Số 1 /
+    Đường Số 24 knot; on the base map Đường Số 23 is a narrow lane running north from there that our graph
+    does not have. Excluded from questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: so-37
+  decision: accepted
+  flags_seen:
+  - S-SHORT
+  reason: 'S-SHORT: short named street confirmed (visual review).'
+- item_id: so-41
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way_divided, centre line 350 m, meets 4 regular streets.
+- item_id: so-45
+  decision: accepted
+  flags_seen:
+  - S-PIECES
+  reason: 'S-PIECES: pieces confirmed as one street interrupted by a roundabout, median, bridge or park
+    (visual review).'
+- item_id: so-46
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: so-47
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 118 m, meets 4 regular streets.
+- item_id: so-49
+  decision: excluded_from_questions
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'Visual review verdict ''unclear'': Đường số 49 ends about 10 m short of the base-map "Đường
+    Số 13" line that runs north-west of Đường Số 11; that part of Đường Số 13 is not in our graph (same
+    as item 51). Excluded from questions (decision Q-A); the street stays in the graph for routing.'
+- item_id: so-50
+  decision: accepted
+  flags_seen:
+  - S-INNER-DEAD-END
+  reason: 'S-INNER-DEAD-END: dead end confirmed on the base map / satellite (visual review).'
+- item_id: dang-dung
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 352 m, meets 3 regular streets.
+- item_id: dang-thi-nhu
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 145 m, meets 2 regular streets.
+- item_id: dang-tran-con
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 133 m, meets 2 regular streets.
+- item_id: dang-tat
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction two_way, centre line 211 m, meets 2 regular streets.
+- item_id: de-tham
+  decision: accepted
+  flags_seen:
+  - S-MIXED
+  reason: 'S-MIXED: direction status ''mixed'' follows the OSM oneway tags (two-way 250 m, divided 0 m,
+    one-way 546 m (one-way share of edge length 52%)); mixed streets are not used for direction questions.'
+- item_id: dong-khoi
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 969 m, meets 11 regular streets.
+- item_id: do-quang-dau
+  decision: accepted
+  flags_seen: []
+  reason: No automatic flag. Direction one_way, centre line 172 m, meets 2 regular streets.
+- item_id: j366368194
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mê Linh, Phạm Viết Chánh.'
+- item_id: j366378988
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Cầu Trần Khánh Dư, Trường Sa.'
+- item_id: j366380614
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Lê Quốc Hưng, Lê Văn Linh.'
+- item_id: j366381001
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Hoàng Diệu, Vĩnh Khánh.'
+- item_id: j366384879
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Mẫn Đạt, Nguyễn Ngọc Phương.'
+- item_id: j366386086
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Mẫn Đạt, Phạm Viết Chánh.'
+- item_id: j366389762
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 3 node(s), streets: Phan Văn Hân, Xô Viết Nghệ Tĩnh.'
+- item_id: j366390033
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Điện Biên Phủ 2, Điện Biên Phủ.'
+- item_id: j366404537
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Tất Thành, Đoàn Như Hài.'
+- item_id: j366407697
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Xô Viết Nghệ Tĩnh, Đường Nguyễn Cửu
+    Vân.'
+- item_id: j366410196
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bến Vân Đồn, Lê Quốc Hưng.'
+- item_id: j366411631
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phạm Viết Chánh, Đường Nguyễn Công Trứ.'
+- item_id: j366413598
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Lê Văn Duyệt, Vũ Huy Tấn.'
+- item_id: j366413639
+  decision: accepted
+  flags_seen:
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MEET-WITHOUT-SHARED-NODE: the streets meet here through a roundabout, median crossing or
+    slip lane (meet here without a shared node: Lê Thạch / Nguyễn Trường Tộ).'
+- item_id: j366414310
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Tôn Đản, Vĩnh Hội.'
+- item_id: j366414422
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trường Sa, Đường Trần Văn Khê.'
+- item_id: j366414466
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Văn Bánh, Nguyễn Văn Trỗi.'
+- item_id: j366414596
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Khánh Hội, Đường số 41.'
+- item_id: j366417336
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Mẫn Đạt, Huỳnh Tịnh Của, Nguyễn Văn
+    Lạc, Phan Huy Ôn, Phan Văn Hân.'
+- item_id: j366417633
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j366419012
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Trường Tộ, Đoàn Như Hài.'
+- item_id: j366430474
+  decision: accepted
+  flags_seen:
+  - J-MANY-NODES
+  reason: 'J-MANY-NODES: many nodes confirmed as one place or one complex crossing (visual review).'
+- item_id: j366434313
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Tất Thành, Tôn Đản.'
+- item_id: j366440712
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trường Sa, Đường Hoa Phượng.'
+- item_id: j366440881
+  decision: accepted
+  flags_seen:
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MEET-WITHOUT-SHARED-NODE: the streets meet here through a roundabout, median crossing or
+    slip lane (meet here without a shared node: Nguyễn Huy Tự / Trần Quang Khải).'
+- item_id: j366446528
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Ngọc Phương, Phan Huy Ôn.'
+- item_id: j366447012
+  decision: accepted
+  flags_seen:
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MANY-NODES: many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Đường Số 1 / Vĩnh Hội; Đường Số 1 / Đường Số 28; Đường Số 1 / Đường Tân Vĩnh; Đường Số 28 /
+    Đường Số 9; Đường Số 9 / Vĩnh Hội; Đường Số 9 / Đường Tân Vĩnh).'
+- item_id: j366448352
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trường Sa, Đường Hoa Phượng.'
+- item_id: j366450115
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Hoàng Diệu, Vĩnh Khánh.'
+- item_id: j366453421
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Hoàng Diệu, Nguyễn Tất Thành.'
+- item_id: j366455478
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Tịnh Của, Đường Nguyễn Công Trứ.'
+- item_id: j366456099
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Văn Linh, Đoàn Văn Bơ.'
+- item_id: j366461770
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cù Lao, Hoa Sứ.'
+- item_id: j366462118
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Tôn Đản, Đoàn Văn Bơ.'
+- item_id: j366467187
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Xóm Chiếu, Đoàn Văn Bơ.'
+- item_id: j366467217
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Nguyễn Trãi, Nguyễn Văn Cừ.'
+- item_id: j366468183
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Trường Sa, Đường Nguyễn Công Hoan.'
+- item_id: j366469410
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 3 node(s), streets: Hoàng Diệu, Lê Quốc Hưng.'
+- item_id: j366471364
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vũ Huy Tấn, Đường Vạn Kiếp.'
+- item_id: j366474751
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoa Sứ, Đường Hoa Phượng.'
+- item_id: j366477562
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Trường Sa, Trần Nguyên Đán.'
+- item_id: j377143137
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Bông, Đinh Tiên Hoàng.'
+- item_id: j403582429
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Diệu, Đường Số 48.'
+- item_id: j406628105
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Bến Vân Đồn, Nguyễn Trường Tộ.'
+- item_id: j411917819
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Nhật Duật, Trần Quý Khoách.'
+- item_id: j411917821
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Pasteur, Trần Quốc Toản.'
+- item_id: j411917828
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Nguyễn, Đặng Tất.'
+- item_id: j411917832
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Sư Thiện Chiếu.'
+- item_id: j411917834
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Điện Biên Phủ.'
+- item_id: j411917836
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j411917837
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j411917863
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Nguyễn Hiền, Đường Số 1 Cư Xá Đô
+    Thành.'
+- item_id: j411917880
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Huệ, Ngô Đức Kế.'
+- item_id: j411917881
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Huệ, Ngô Đức Kế.'
+- item_id: j411917924
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Liêm, Võ Thị Sáu.'
+- item_id: j411918058
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Phạm Ngọc Thạch / Trần Cao Vân; Phạm Ngọc Thạch / Võ Văn Tần; Trần Cao Vân / Võ Văn Tần).'
+- item_id: j411918138
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phạm Ngọc Thạch, Võ Thị Sáu.'
+- item_id: j411918191
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cao Bá Nhạ, Cống Quỳnh.'
+- item_id: j411918254
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hồ Xuân Hương, Trương Định.'
+- item_id: j411918348
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Thái Học, Trịnh Văn Cấn.'
+- item_id: j411918577
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Siêu, Thái Văn Lung.'
+- item_id: j411918578
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Nguyễn Hiền, Đường Số 2 Cư Xá Đô
+    Thành.'
+- item_id: j411918581
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Ngô Thời Nhiệm, Trần Quốc Thảo.'
+- item_id: j411918582
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Nguyễn Hiền, Đường Số 4 Cư Xá Đô
+    Thành.'
+- item_id: j411918633
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 3 Cư Xá Đô Thành, Đường Số 6 Cư
+    Xá Đô Thành.'
+- item_id: j411918640
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Cách Mạng Tháng Tám, Điện Biên Phủ.'
+- item_id: j411918658
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-CONNECTORS
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-CONNECTORS:
+    connectors confirmed as slip lanes of this crossing (visual review); J-MEET-WITHOUT-SHARED-NODE: the
+    streets meet here through a roundabout, median crossing or slip lane (meet here without a shared node:
+    Trần Quốc Toản / Võ Thị Sáu).'
+- item_id: j411918659
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trương Quyền, Võ Thị Sáu.'
+- item_id: j411918668
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Trần Hưng Đạo, Trần Đình Xu.'
+- item_id: j411918706
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j411918711
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Khánh Dư, Trần Khắc Chân.'
+- item_id: j411918714
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Nguyễn Văn Chiêm.'
+- item_id: j411918767
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MANY-NODES:
+    many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Hàn Thuyên / Lê Duẩn; Hàn Thuyên / Nguyễn Du; Hàn Thuyên / Phạm Ngọc Thạch; Lê Duẩn / Nguyễn
+    Du; Lê Duẩn / Phạm Ngọc Thạch; Nguyễn Du / Phạm Ngọc Thạch).'
+- item_id: j411918785
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-CONNECTORS
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-CONNECTORS:
+    connectors confirmed as slip lanes of this crossing (visual review); J-MEET-WITHOUT-SHARED-NODE: the
+    streets meet here through a roundabout, median crossing or slip lane (meet here without a shared node:
+    Cầu Điện Biên Phủ 2 / Nguyễn Bỉnh Khiêm).'
+- item_id: j411918796
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MANY-NODES:
+    many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Hai Bà Trưng / Hồ Huấn Nghiệp; Hai Bà Trưng / Ngô Đức Kế; Hai Bà Trưng / Phan Văn Đạt; Hai Bà
+    Trưng / Thi Sách; Hai Bà Trưng / Tôn Đức Thắng; Hồ Huấn Nghiệp / Ngô Đức Kế; Hồ Huấn Nghiệp / Phan
+    Văn Đạt; Hồ Huấn Nghiệp / Thi Sách; Hồ Huấn Nghiệp / Tôn Đức Thắng; Ngô Đức Kế / Phan Văn Đạt; Ngô
+    Đức Kế / Thi Sách; Ngô Đức Kế / Tôn Đức Thắng; Phan Văn Đạt / Thi Sách; Phan Văn Đạt / Tôn Đức Thắng;
+    Thi Sách / Tôn Đức Thắng).'
+- item_id: j411918807
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Khánh Dư, Trần Nhật Duật.'
+- item_id: j411918819
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 1 Cư Xá Đô Thành, Đường Vườn Chuối.'
+- item_id: j411918820
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Kỳ Đồng, Trương Định.'
+- item_id: j411918826
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 2 Cư Xá Đô Thành, Đường Vườn Chuối.'
+- item_id: j411918830
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Du, Nguyễn Trung Trực.'
+- item_id: j411918835
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 3 Cư Xá Đô Thành, Đường Vườn Chuối.'
+- item_id: j411918836
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 4 Cư Xá Đô Thành, Đường Vườn Chuối.'
+- item_id: j411918844
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Lê Chân, Hai Bà Trưng.'
+- item_id: j411918850
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hàn Thuyên, Nam Kỳ Khởi Nghĩa.'
+- item_id: j411918853
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phùng Khắc Khoan, Điện Biên Phủ.'
+- item_id: j411918854
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Alexandre de Rhodes, Nam Kỳ Khởi Nghĩa.'
+- item_id: j411918860
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Hàm Nghi, Pasteur.'
+- item_id: j411918862
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hàm Nghi, Tôn Thất Đạm.'
+- item_id: j411918866
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Alexandre de Rhodes, Pasteur.'
+- item_id: j411918867
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 3 node(s), streets: Hàm Nghi, Tôn Thất Đạm.'
+- item_id: j411918880
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Sa, Nguyễn Đình Chiểu.'
+- item_id: j411918883
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Điện Biên Phủ 1, Điện Biên Phủ.'
+- item_id: j411918892
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Sa, Nguyễn Văn Thủ.'
+- item_id: j411918904
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Quý Đôn, Võ Văn Tần.'
+- item_id: j411918911
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cây Điệp, Nguyễn Đình Chiểu.'
+- item_id: j411918912
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mạc Đĩnh Chi, Nguyễn Đình Chiểu.'
+- item_id: j411918913
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cây Điệp, Nguyễn Văn Thủ.'
+- item_id: j411918914
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cây Điệp, Phan Ngữ, Điện Biên Phủ.'
+- item_id: j411918916
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cây Điệp, Nguyễn Thành Ý.'
+- item_id: j411919023
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Cầu Công Lý, Nam Kỳ Khởi Nghĩa.'
+- item_id: j411919026
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Công Lý, Nguyễn Văn Trỗi.'
+- item_id: j411919027
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Lê Văn Sỹ, Lê Văn Sỹ.'
+- item_id: j411919033
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Du, Trương Định.'
+- item_id: j411919045
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Thi Sách, Đông Du.'
+- item_id: j411919051
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mai Thị Lựu, Nguyễn Huy Tự, Nguyễn Văn
+    Giai.'
+- item_id: j411919062
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Lai, Nguyễn Văn Tráng.'
+- item_id: j411919070
+  decision: accepted
+  flags_seen:
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MANY-NODES: many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Cầu Lê Văn Sỹ / Hoàng Sa).'
+- item_id: j411919149
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hồ Xuân Hương, Nguyễn Thông.'
+- item_id: j411919178
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 2, Nguyễn Hữu Cảnh.'
+- item_id: j411919179
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thái Bình, Phó Đức Chính.'
+- item_id: j411919185
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Kỳ Đồng.'
+- item_id: j411919193
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Tự Trọng, Pasteur.'
+- item_id: j411919210
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MANY-NODES:
+    many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Cách Mạng Tháng Tám / Lý Chính Thắng; Cách Mạng Tháng Tám / Nguyễn Phúc Nguyên; Cách Mạng Tháng
+    Tám / Nguyễn Thượng Hiền; Cách Mạng Tháng Tám / Võ Thị Sáu; Lý Chính Thắng / Nguyễn Phúc Nguyên; Lý
+    Chính Thắng / Nguyễn Thượng Hiền; Lý Chính Thắng / Võ Thị Sáu; Nguyễn Phúc Nguyên / Nguyễn Thượng
+    Hiền; Nguyễn Phúc Nguyên / Võ Thị Sáu; Nguyễn Thượng Hiền / Võ Thị Sáu).'
+- item_id: j411919215
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Pasteur.'
+- item_id: j411919276
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Số 9, Trường Sa.'
+- item_id: j411919277
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Số 9, Hoàng Sa.'
+- item_id: j411919278
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thành Ý, Đinh Tiên Hoàng.'
+- item_id: j411919306
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Du, Pasteur.'
+- item_id: j411919358
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 5 node(s), streets: Lê Lợi, Nam Kỳ Khởi Nghĩa.'
+- item_id: j411919362
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MANY-NODES:
+    many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Huỳnh Thúc Kháng / Lê Lai; Huỳnh Thúc Kháng / Lê Lợi; Huỳnh Thúc Kháng / Phan Bội Châu; Huỳnh
+    Thúc Kháng / Phan Chu Trinh; Huỳnh Thúc Kháng / Phó Đức Chính; Huỳnh Thúc Kháng / Trần Hưng Đạo; Hàm
+    Nghi / Huỳnh Thúc Kháng; Hàm Nghi / Lê Lai; Hàm Nghi / Lê Lợi; Hàm Nghi / Phan Bội Châu; Hàm Nghi
+    / Phan Chu Trinh; Hàm Nghi / Trần Hưng Đạo; Lê Lai / Lê Lợi; Lê Lai / Phan Bội Châu; Lê Lai / Phó
+    Đức Chính; Lê Lai / Trần Hưng Đạo; Lê Lợi / Phan Chu Trinh; Lê Lợi / Phó Đức Chính; Lê Lợi / Trần
+    Hưng Đạo; Phan Bội Châu / Phan Chu Trinh; Phan Bội Châu / Phó Đức Chính; Phan Bội Châu / Trần Hưng
+    Đạo; Phan Chu Trinh / Phó Đức Chính; Phan Chu Trinh / Trần Hưng Đạo; Phó Đức Chính / Trần Hưng Đạo).'
+- item_id: j411919375
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Khương Ninh, Phan Liêm.'
+- item_id: j411919405
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Lê Lợi, Pasteur.'
+- item_id: j411919456
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thị Hồng Gấm, Nguyễn Thái Học.'
+- item_id: j411919545
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đông Du, Đồng Khởi.'
+- item_id: j411919580
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mạc Thị Bưởi, Đồng Khởi.'
+- item_id: j411919664
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Sa, Trần Nhật Duật.'
+- item_id: j411919667
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Sa, Trần Khắc Chân.'
+- item_id: j411919798
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Hoàng Sa.'
+- item_id: j411920094
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Sa, Nguyễn Bỉnh Khiêm.'
+- item_id: j411920788
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Cảnh Chân, Nguyễn Trãi.'
+- item_id: j411920821
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Tịnh Của, Trần Quốc Toản.'
+- item_id: j411921228
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cô Bắc, Hồ Hảo Hớn.'
+- item_id: j411921464
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Hoàng Hoa Thám, Trần Nguyên Đán.'
+- item_id: j411921534
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Tự Trọng, Thái Văn Lung.'
+- item_id: j411922074
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j411922435
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 4 Cư Xá Đô Thành, Đường Số 7 Cư
+    Xá Đô Thành.'
+- item_id: j411922587
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cô Giang, Hồ Hảo Hớn.'
+- item_id: j411922945
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Tịnh Của, Lý Chính Thắng.'
+- item_id: j411923141
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Thị Minh Khai, Phạm Khắc.'
+- item_id: j411923192
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 2 Cư Xá Đô Thành, Đường Số 5 Cư
+    Xá Đô Thành.'
+- item_id: j411923507
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thái Học, Phan Văn Trường.'
+- item_id: j411923589
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Phạm Khắc.'
+- item_id: j411924053
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Quốc Thảo, Võ Văn Tần.'
+- item_id: j411924316
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Đường Vườn Chuối.'
+- item_id: j411924672
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Kỳ Đồng, Trần Quốc Thảo.'
+- item_id: j411924866
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thị Riêng, Nguyễn Văn Tráng.'
+- item_id: j411925024
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 3 Cư Xá Đô Thành, Đường Số 7 Cư
+    Xá Đô Thành.'
+- item_id: j411925335
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thị Diệu, Trương Định.'
+- item_id: j411925357
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 4 node(s), streets: Cầu Kiệu, Hai Bà Trưng.'
+- item_id: j411925445
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Công Trứ, Phó Đức Chính.'
+- item_id: j411925479
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Nguyễn Hiền, Đường Số 3 Cư Xá Đô
+    Thành.'
+- item_id: j411925830
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Quý Đôn, Nguyễn Thị Minh Khai.'
+- item_id: j411925840
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 1 Cư Xá Đô Thành, Đường Số 5 Cư
+    Xá Đô Thành.'
+- item_id: j411925870
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Tịnh Của, Nguyễn Văn Mai.'
+- item_id: j411925891
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Thủ, Phan Kế Bính.'
+- item_id: j411925893
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Phan Kế Bính.'
+- item_id: j411925896
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j411925901
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Hữu Cầu, Thạch Thị Thanh.'
+- item_id: j411925910
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Cao Thắng, Nguyễn Thị Minh Khai.'
+- item_id: j411925913
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thượng Hiền, Võ Văn Tần.'
+- item_id: j411925919
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trương Định, Võ Văn Tần.'
+- item_id: j411925922
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Võ Văn Tần.'
+- item_id: j411925926
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Trần Quốc Thảo.'
+- item_id: j411925934
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Siêu, Thi Sách.'
+- item_id: j411925935
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phùng Khắc Khoan, Trần Cao Vân.'
+- item_id: j411925936
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mạc Đĩnh Chi, Trần Cao Vân.'
+- item_id: j411925937
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Ngô Đức Kế, Đồng Khởi.'
+- item_id: j411925939
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cao Bá Quát, Thi Sách.'
+- item_id: j411925940
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cao Bá Quát, Thái Văn Lung.'
+- item_id: j411925942
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Pasteur, Võ Văn Tần.'
+- item_id: j411925945
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Chu Mạnh Trinh, Lý Tự Trọng.'
+- item_id: j411925946
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thị Minh Khai, Phạm Ngọc Thạch.'
+- item_id: j411925950
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Duẩn, Nguyễn Bỉnh Khiêm.'
+- item_id: j411925954
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mạc Đĩnh Chi, Nguyễn Du.'
+- item_id: j411925956
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Chu Mạnh Trinh, Lê Thánh Tôn.'
+- item_id: j411925962
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Mạc Thị Bưởi.'
+- item_id: j411925963
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Phi Khanh, Võ Thị Sáu, Đinh Tiên
+    Hoàng.'
+- item_id: j411925966
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Lý Chính Thắng.'
+- item_id: j411925967
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Thạch Thị Thanh, Võ Thị Sáu.'
+- item_id: j411925979
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Tôn, Điện Biên Phủ.'
+- item_id: j411925981
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mai Thị Lựu, Điện Biên Phủ.'
+- item_id: j411925982
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Khương Ninh, Phan Ngữ.'
+- item_id: j411925984
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Bỉnh Khiêm, Nguyễn Đình Chiểu.'
+- item_id: j411925985
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Bỉnh Khiêm, Nguyễn Thị Minh
+    Khai.'
+- item_id: j411925987
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mạc Đĩnh Chi, Nguyễn Thị Minh Khai.'
+- item_id: j411925988
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Thủ, Trần Doãn Khanh.'
+- item_id: j411925989
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Huy Tự, Trương Hán Siêu.'
+- item_id: j411925992
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thành Ý, Trần Doãn Khanh.'
+- item_id: j411925996
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trương Hán Siêu, Đinh Tiên Hoàng.'
+- item_id: j411925999
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Gia Thiều, Nguyễn Đình Chiểu.'
+- item_id: j411926001
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lưu Văn Lang, Nguyễn Trung Trực.'
+- item_id: j411926003
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Gia Thiều, Ngô Thời Nhiệm.'
+- item_id: j411926006
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cách Mạng Tháng Tám, Phạm Đình Toái.'
+- item_id: j411926010
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mạc Thị Bưởi, Phan Văn Đạt.'
+- item_id: j411926012
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Khắc Chân, Đặng Dung.'
+- item_id: j411926016
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Đinh Công Tráng.'
+- item_id: j411926019
+  decision: accepted
+  flags_seen:
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MEET-WITHOUT-SHARED-NODE: the streets meet here through a roundabout, median crossing or
+    slip lane (meet here without a shared node: Nguyễn Hữu Cầu / Trần Khắc Chân; Nguyễn Phi Khanh / Trần
+    Khắc Chân).'
+- item_id: j411926021
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Văn Phức, Nguyễn Phi Khanh.'
+- item_id: j411926022
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Thạch Thị Thanh, Đinh Công Tráng.'
+- item_id: j411926028
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Bỉnh Khiêm, Nguyễn Văn Thủ.'
+- item_id: j411926029
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Văn Phức, Võ Thị Sáu.'
+- item_id: j411926034
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Lê Duẩn, Lê Văn Hưu.'
+- item_id: j411926037
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Ngô Văn Năm.'
+- item_id: j411926043
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Siêu, Ngô Văn Năm.'
+- item_id: j411926049
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thông, Sư Thiện Chiếu.'
+- item_id: j411926050
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thông, Phạm Đình Toái.'
+- item_id: j411926051
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trương Quyền, Điện Biên Phủ.'
+- item_id: j411926052
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j411926054
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Ngô Cát, Điện Biên Phủ.'
+- item_id: j411926055
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Tự Trọng, Đặng Trần Côn.'
+- item_id: j411926058
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Du, Đặng Trần Côn.'
+- item_id: j411926065
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huyền Trân Công Chúa, Nguyễn Du, Thủ Khoa
+    Huân.'
+- item_id: j411926068
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Công Kiều, Nguyễn Thái Bình.'
+- item_id: j411926069
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Công Kiều, Lê Thị Hồng Gấm, Phó Đức
+    Chính.'
+- item_id: j411926070
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn An Ninh, Phan Chu Trinh.'
+- item_id: j411926072
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 3 node(s), streets: Trần Đình Xu, Võ Văn Kiệt.'
+- item_id: j411926098
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Quốc Cang, Nguyễn Trãi.'
+- item_id: j411926137
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Kỳ Đồng, Nguyễn Thông.'
+- item_id: j411926140
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Lê Chân, Trần Nhật Duật, Trần Quang
+    Khải.'
+- item_id: j411926143
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Hồ Xuân Hương.'
+- item_id: j411926153
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Thúc Kháng, Hồ Tùng Mậu.'
+- item_id: j411926157
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Đồng Khởi.'
+- item_id: j411926158
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Thúc Kháng, Nguyễn Huệ.'
+- item_id: j411926160
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Pasteur, Võ Thị Sáu.'
+- item_id: j411926164
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Kỳ Khởi Nghĩa, Nguyễn Đình Chiểu.'
+- item_id: j411926172
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thông, Tú Xương.'
+- item_id: j411926174
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thị Hồng Gấm, Yersin.'
+- item_id: j411926178
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Chu Mạnh Trinh, Nguyễn Trung Ngạn.'
+- item_id: j411926179
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cô Giang, Nguyễn Khắc Nhu.'
+- item_id: j411926193
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Trãi, Trần Đình Xu.'
+- item_id: j411926196
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Thúc Kháng, Tôn Thất Đạm.'
+- item_id: j411926197
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Thúc Kháng, Pasteur.'
+- item_id: j411926202
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Nhật Duật, Đặng Tất.'
+- item_id: j411926208
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trương Định, Võ Thị Sáu.'
+- item_id: j411926209
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cô Bắc, Nguyễn Khắc Nhu.'
+- item_id: j411926212
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Kỳ Khởi Nghĩa, Võ Văn Tần.'
+- item_id: j411926213
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Quý Đôn, Võ Thị Sáu.'
+- item_id: j411926215
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Nam Kỳ Khởi Nghĩa, Trần Quốc Toản.'
+- item_id: j411926216
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Chính Thắng, Trương Định.'
+- item_id: j411926221
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Tôn Thất Đạm, Võ Văn Kiệt.'
+- item_id: j411926232
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Nhật Duật, Đặng Dung.'
+- item_id: j411926237
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Nguyễn, Trần Quý Khoách.'
+- item_id: j411926238
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Nguyễn, Trần Khánh Dư.'
+- item_id: j411926241
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Nguyễn, Trần Quang Khải.'
+- item_id: j411926243
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Công Trứ, Pasteur.'
+- item_id: j411926245
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Công Trứ, Tôn Thất Đạm.'
+- item_id: j411926247
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Kỳ Khởi Nghĩa, Nguyễn Công Trứ.'
+- item_id: j411926265
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Khương Ninh, Phan Tôn.'
+- item_id: j411926271
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lương Hữu Khánh, Nguyễn Thị Minh Khai.'
+- item_id: j411926343
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Trần Quang Khải.'
+- item_id: j411926344
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Hai Bà Trưng, Võ Thị Sáu.'
+- item_id: j411926363
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Nguyễn Hữu Cầu.'
+- item_id: j411926370
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j411926372
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huyền Quang, Nguyễn Phi Khanh.'
+- item_id: j411926373
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huyền Quang, Thạch Thị Thanh.'
+- item_id: j411926378
+  decision: accepted
+  flags_seen:
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MANY-NODES: many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Cao Bá Quát / Nguyễn Siêu).'
+- item_id: j411926380
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Tự Trọng, Đồng Khởi.'
+- item_id: j411926390
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Anh Xuân, Lý Tự Trọng.'
+- item_id: j411926393
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Đông Du.'
+- item_id: j411926403
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Quý Đôn, Điện Biên Phủ.'
+- item_id: j411926405
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cách Mạng Tháng Tám, Tú Xương.'
+- item_id: j411926407
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hồ Tùng Mậu, Ngô Đức Kế.'
+- item_id: j411926412
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Tự Trọng, Nguyễn Trung Trực.'
+- item_id: j411926415
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Quốc Thảo, Điện Biên Phủ.'
+- item_id: j411926419
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phạm Ngọc Thạch, Điện Biên Phủ.'
+- item_id: j411926424
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Nguyễn Văn Mai.'
+- item_id: j411926428
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cách Mạng Tháng Tám, Ngô Thời Nhiệm.'
+- item_id: j411926429
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Phan Chu Trinh.'
+- item_id: j411926436
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thái Bình, Yersin.'
+- item_id: j411926437
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Trương Định.'
+- item_id: j411926438
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Thủ Khoa Huân.'
+- item_id: j411926446
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mạc Đĩnh Chi, Nguyễn Văn Thủ.'
+- item_id: j411926451
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Nguyễn Thị Diệu.'
+- item_id: j411926453
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Kế Bính, Điện Biên Phủ.'
+- item_id: j411926455
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Pasteur, Tôn Thất Thiệp.'
+- item_id: j411926457
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Thủ, Phùng Khắc Khoan.'
+- item_id: j411926458
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mai Thị Lựu, Nguyễn Văn Thủ.'
+- item_id: j411926465
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 4 node(s), streets: Hai Bà Trưng, Nguyễn Văn Thủ.'
+- item_id: j411926469
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cao Thắng, Võ Văn Tần.'
+- item_id: j411926477
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Hai Bà Trưng, Điện Biên Phủ.'
+- item_id: j411926483
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phạm Ngũ Lão, Đề Thám.'
+- item_id: j411926487
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Lý Chính Thắng, Nam Kỳ Khởi Nghĩa.'
+- item_id: j411926496
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Quý Đôn, Nguyễn Đình Chiểu.'
+- item_id: j411926497
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Quý Đôn, Ngô Thời Nhiệm.'
+- item_id: j411926498
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Thi Sách.'
+- item_id: j411926503
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MANY-NODES:
+    many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Nguyễn Cư Trinh / Nguyễn Khắc Nhu).'
+- item_id: j411926505
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Phan Bội Châu.'
+- item_id: j411926508
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Quốc Thảo, Tú Xương.'
+- item_id: j411926510
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Quý Đôn, Tú Xương.'
+- item_id: j411926516
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Kỳ Khởi Nghĩa, Nguyễn Thái Bình.'
+- item_id: j411926523
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Nguyễn Đình Chiểu.'
+- item_id: j411926524
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hòa Mỹ, Đinh Tiên Hoàng.'
+- item_id: j411926527
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Calmette, Đặng Thị Nhu.'
+- item_id: j411926532
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Kỳ Khởi Nghĩa, Điện Biên Phủ.'
+- item_id: j411926533
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Ký Con, Lê Thị Hồng Gấm.'
+- item_id: j411926537
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Nguyễn Trung Trực.'
+- item_id: j411926538
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Phùng Khắc Khoan.'
+- item_id: j411926545
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Nam Kỳ Khởi Nghĩa.'
+- item_id: j411926547
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Hai Bà Trưng, Lê Duẩn.'
+- item_id: j411926551
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cách Mạng Tháng Tám, Võ Văn Tần.'
+- item_id: j411926554
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Pasteur.'
+- item_id: j411926559
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Pasteur, Điện Biên Phủ.'
+- item_id: j411926563
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cách Mạng Tháng Tám, Nguyễn Đình Chiểu.'
+- item_id: j411926577
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Calmette, Nguyễn Thái Bình.'
+- item_id: j411926578
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Trần Cao Vân.'
+- item_id: j411926585
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mạc Đĩnh Chi, Điện Biên Phủ.'
+- item_id: j411926586
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Tôn Thất Thiệp, Tôn Thất Đạm.'
+- item_id: j411926594
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Lý Tự Trọng.'
+- item_id: j411926596
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Thái Văn Lung.'
+- item_id: j411926597
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Phạm Ngọc Thạch.'
+- item_id: j411926604
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thị Minh Khai, Pasteur.'
+- item_id: j411926606
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mai Thị Lựu, Nguyễn Đình Chiểu.'
+- item_id: j411926607
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trương Định, Điện Biên Phủ.'
+- item_id: j411926609
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Nguyễn Đình Chiểu.'
+- item_id: j411926613
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Tự Trọng, Trương Định.'
+- item_id: j411926617
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Tự Trọng, Thủ Khoa Huân.'
+- item_id: j411926620
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hồ Tùng Mậu, Tôn Thất Thiệp.'
+- item_id: j411926622
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 3 node(s), streets: Trần Hưng Đạo, Đề Thám.'
+- item_id: j411926624
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Nguyễn Du.'
+- item_id: j411926628
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trương Định, Tú Xương.'
+- item_id: j411926632
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Trãi, Nguyễn Văn Tráng.'
+- item_id: j411926638
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Công Trứ, Yersin.'
+- item_id: j411926667
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Trương Định.'
+- item_id: j411926675
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Võ Thị Sáu.'
+- item_id: j411926679
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Tú Xương.'
+- item_id: j411926696
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Kỳ Khởi Nghĩa, Nguyễn Du.'
+- item_id: j411926701
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Lê Thánh Tôn.'
+- item_id: j411926704
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Thủ, Đinh Tiên Hoàng.'
+- item_id: j411926705
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Đinh Tiên Hoàng, Điện Biên Phủ.'
+- item_id: j411926712
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Calmette, Lê Thị Hồng Gấm.'
+- item_id: j571360922
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Bến Vân Đồn, Nguyễn Khoái.'
+- item_id: j634134021
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MANY-NODES:
+    many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Lý Thái Tổ / Nguyễn Thị Minh Khai; Lý Thái Tổ / Nguyễn Văn Cừ; Lý Thái Tổ / Phạm Viết Chánh;
+    Nguyễn Thị Minh Khai / Nguyễn Văn Cừ; Nguyễn Văn Cừ / Phạm Viết Chánh).'
+- item_id: j676560165
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Điện Biên Phủ 1, Điện Biên Phủ.'
+- item_id: j676561476
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Bỉnh Khiêm, Điện Biên Phủ.'
+- item_id: j706286177
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Đường Tân Vĩnh, Đường số 41.'
+- item_id: j710640668
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoa Hồng, Đường Nguyễn Công Hoan.'
+- item_id: j710640676
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoa Hồng, Đường Nguyễn Công Hoan.'
+- item_id: j711335740
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Đình Phùng, Đường Cô Bắc.'
+- item_id: j712140207
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cù Lao, Trường Sa.'
+- item_id: j728690556
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 2, Nguyễn Hữu Cảnh.'
+- item_id: j728690557
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 2, Nguyễn Hữu Cảnh.'
+- item_id: j728690558
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 2, Nguyễn Hữu Cảnh.'
+- item_id: j728690560
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 1, Nguyễn Thị Minh Khai.'
+- item_id: j728690562
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 1, Xô Viết Nghệ Tĩnh.'
+- item_id: j729523336
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Bùi Hữu Nghĩa, Nguyễn Văn Giai.'
+- item_id: j735998145
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 14, Đường Số 15.'
+- item_id: j735998149
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 13, Đường Số 14.'
+- item_id: j735998169
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Cầu Hoàng Hoa Thám, Trần Nguyên Đán,
+    Vũ Huy Tấn.'
+- item_id: j735998187
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 15, Đường Vạn Kiếp.'
+- item_id: j735998202
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 13, Đường Số 16, Đường Vạn Kiếp.'
+- item_id: j735998210
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vũ Huy Tấn, Đường Số 14.'
+- item_id: j746617417
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 38, Đường số 45.'
+- item_id: j746617453
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường 12A, Đường số 45.'
+- item_id: j746617459
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường 12A, Đường Tân Vĩnh.'
+- item_id: j746617465
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 38, Đường Tân Vĩnh.'
+- item_id: j746617476
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Khánh Hội, Đường Số 38.'
+- item_id: j746617486
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Đường số 41, Đường số 45.'
+- item_id: j762368919
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Duy Tân, Huỳnh Văn Bánh.'
+- item_id: j922299929
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Lê Thạch, Đinh Lễ.'
+- item_id: j922299951
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Lê Quốc Hưng, Đinh Lễ.'
+- item_id: j1001114508
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Phạm Viết Chánh, Trần Quang Long.'
+- item_id: j1375483041
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vũ Huy Tấn, Đường số 11.'
+- item_id: j1597983325
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Bến Vân Đồn, Khánh Hội.'
+- item_id: j1657521915
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Biểu, Phan Văn Trị.'
+- item_id: j1671468479
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Đình Phùng, Đường Cô Giang.'
+- item_id: j1767194037
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bến Vân Đồn, Dẫn Cầu Calmette.'
+- item_id: j1767194040
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Calmette, Dẫn Cầu Calmette.'
+- item_id: j1767203801
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 3 node(s), streets: Calmette, Cầu Calmette, Nguyễn Công
+    Trứ.'
+- item_id: j1767234732
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Diệu, Đường số 45.'
+- item_id: j1767235000
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Diệu, Đường Tân Vĩnh.'
+- item_id: j1767821187
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bến Vân Đồn, Cầu Dừa.'
+- item_id: j1767909356
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Calmette, Dẫn Cầu Calmette.'
+- item_id: j1767909383
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Calmette, Dẫn Cầu Calmette.'
+- item_id: j1767909393
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Dẫn Cầu Calmette, Võ Văn Kiệt.'
+- item_id: j1767909417
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j1767909424
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Bến Vân Đồn, Đoàn Văn Bơ.'
+- item_id: j1768376030
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 32, Đường Tân Vĩnh.'
+- item_id: j1768376037
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 30, Đường Tân Vĩnh.'
+- item_id: j1768404057
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường 10C, Đường số 45.'
+- item_id: j1768404060
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường 10B, Đường 10C, Đường Tân Vĩnh.'
+- item_id: j1768404126
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Công Trứ, Nguyễn Thái Học.'
+- item_id: j1768404148
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường 10A, Đường 10B.'
+- item_id: j1768404176
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường 10A, Đường Tân Vĩnh.'
+- item_id: j1768404179
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Khánh Hội, Đường số 50.'
+- item_id: j1768404182
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường số 45, Đường số 50.'
+- item_id: j1768404190
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vĩnh Hội, Đường Số 48.'
+- item_id: j1768828014
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bến Vân Đồn, Cầu Dừa.'
+- item_id: j1769173767
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Cầu Khánh Hội, Nguyễn Tất Thành.'
+- item_id: j1769173771
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. roundabout_or_place, 5 node(s), streets: Bến Vân Đồn, Nguyễn Tất Thành.'
+- item_id: j1769173843
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hồ Tùng Mậu, Võ Văn Kiệt.'
+- item_id: j1769173868
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phó Đức Chính, Võ Văn Kiệt.'
+- item_id: j1769173870
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Kỳ Khởi Nghĩa, Võ Văn Kiệt.'
+- item_id: j1769173880
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Tất Thành, Xóm Chiếu.'
+- item_id: j1769173982
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hồ Tùng Mậu, Nguyễn Công Trứ.'
+- item_id: j1769277421
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Công trường Lam Sơn, Đồng Khởi.'
+- item_id: j1769277433
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Lê Lợi, Đồng Khởi.'
+- item_id: j1769277472
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j1769456883
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Chiêm, Phạm Ngọc Thạch.'
+- item_id: j1769456941
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Alexandre de Rhodes, Phạm Ngọc Thạch.'
+- item_id: j1769692389
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Thị Minh Khai, Đinh Tiên Hoàng.'
+- item_id: j1773240209
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Calmette, Dẫn Cầu Calmette.'
+- item_id: j1777244292
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Diệu, Đường số 45.'
+- item_id: j1780010830
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 51, Đường Tân Vĩnh.'
+- item_id: j1780010887
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Khánh Hội, Đường Số 51.'
+- item_id: j1780010903
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 33, Đường Số 51.'
+- item_id: j1985346078
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Công trường Lam Sơn, Đồng Khởi.'
+- item_id: j1985832548
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Khánh Hội, Đường số 46.'
+- item_id: j1987339537
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 11, Đường Số 13.'
+- item_id: j1987339812
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 11, Đường số 47.'
+- item_id: j1987340002
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 3 node(s), streets: Đường Số 11, Đường Số 31, Đường Tân
+    Vĩnh.'
+- item_id: j1992606638
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 2, Đường Số 28.'
+- item_id: j1992606644
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 2, Đường Số 8.'
+- item_id: j1992606653
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 9, Đường số 37.'
+- item_id: j1992606661
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Tân Vĩnh, Đường số 49.'
+- item_id: j1992606665
+  decision: accepted
+  flags_seen:
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MEET-WITHOUT-SHARED-NODE: the streets meet here through a roundabout, median crossing or
+    slip lane (meet here without a shared node: Đường Số 1 / Đường Số 5).'
+- item_id: j1992606685
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 24, Đường Số 6.'
+- item_id: j1992606688
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường số 47, Đường số 49.'
+- item_id: j1992606691
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vĩnh Hội, Đường Số 16.'
+- item_id: j1992606694
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 1, Đường Số 13.'
+- item_id: j1992606696
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 16, Đường Số 18.'
+- item_id: j1992606730
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vĩnh Hội, Đường Số 7, Đường Số 8.'
+- item_id: j1992606732
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 13, Đường Số 5.'
+- item_id: j1992606750
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 10, Đường Số 6.'
+- item_id: j1992606762
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 28, Đường Số 6.'
+- item_id: j1992606776
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 16, Đường Số 6.'
+- item_id: j1992606778
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 12, Đường Số 6.'
+- item_id: j1992606780
+  decision: accepted
+  flags_seen:
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MEET-WITHOUT-SHARED-NODE: the streets meet here through a roundabout, median crossing or
+    slip lane (meet here without a shared node: Đường 24 / Đường Số 1; Đường Số 1 / Đường số 23; Đường
+    số 19 / Đường số 23).'
+- item_id: j1992606787
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vĩnh Hội, Đường Số 22.'
+- item_id: j1992606795
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 13, Đường Số 9.'
+- item_id: j1992606805
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 1, Đường Số 7.'
+- item_id: j1992606813
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 10, Đường Số 18, Đường Số 20.'
+- item_id: j1992606815
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vĩnh Hội, Đường Số 24, Đường số 23.'
+- item_id: j1992606817
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 4, Đường Số 8.'
+- item_id: j1992606831
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 13, Đường Số 3.'
+- item_id: j1992606832
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 6, Đường Số 8.'
+- item_id: j1992606837
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 3, Đường số 37.'
+- item_id: j1992606841
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 18, Đường Số 22, Đường Số 6.'
+- item_id: j1992606849
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 28, Đường Số 4.'
+- item_id: j1992606850
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vĩnh Hội, Đường Số 12.'
+- item_id: j1992606854
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Vĩnh Hội, Đường Số 10.'
+- item_id: j1992606858
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Đường Số 42, Đường số 47.'
+- item_id: j1992606866
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 1, Đường Số 16.'
+- item_id: j1996654208
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 2 node(s), streets: Võ Văn Kiệt, Yersin.'
+- item_id: j1996654212
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 2 node(s), streets: Hồ Hảo Hớn, Võ Văn Kiệt.'
+- item_id: j1996654360
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MANY-NODES
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MANY-NODES:
+    many nodes confirmed as one place or one complex crossing (visual review).'
+- item_id: j1996655118
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Cảnh Chân, Võ Văn Kiệt.'
+- item_id: j1996655282
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 3 node(s), streets: Ký Con, Võ Văn Kiệt.'
+- item_id: j1997244038
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Tôn Đản, Vĩnh Khánh.'
+- item_id: j1998235253
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trường Sa, Điện Biên Phủ.'
+- item_id: j1998235277
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Bùi Hữu Nghĩa, Đường Bùi Hữu Nghĩa.'
+- item_id: j1998235285
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mai Thị Lựu, Điện Biên Phủ.'
+- item_id: j1998235312
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 2 node(s), streets: Trường Sa, Điện Biên Phủ.'
+- item_id: j1998235357
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Diên Hồng, Trường Sa.'
+- item_id: j2025938531
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Dẫn Cầu Calmette, Võ Văn Kiệt.'
+- item_id: j2026783970
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 44, Đường số 47.'
+- item_id: j2026784419
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 42, Đường Tân Vĩnh.'
+- item_id: j2026784433
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 40, Đường Tân Vĩnh.'
+- item_id: j2030638516
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Văn Hân, Điện Biên Phủ.'
+- item_id: j2032267208
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Lê Lai, Nguyễn Thị Nghĩa.'
+- item_id: j2032267286
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Cảnh Chân, Trần Hưng Đạo.'
+- item_id: j2032267337
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 3 node(s), streets: Hoàng Diệu, Khánh Hội.'
+- item_id: j2032267371
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Hoàng Diệu, Đoàn Văn Bơ.'
+- item_id: j2032267376
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cô Bắc, Nguyễn Thái Học.'
+- item_id: j2034589230
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Huệ, Tôn Thất Thiệp.'
+- item_id: j2034589236
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Mạc Thị Bưởi, Nguyễn Huệ.'
+- item_id: j2034589240
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Calmette, Đoàn Văn Bơ.'
+- item_id: j2034589312
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Calmette, Đoàn Văn Bơ.'
+- item_id: j2036082840
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Du, Tôn Đức Thắng.'
+- item_id: j2036082874
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Trung Ngạn, Tôn Đức Thắng.'
+- item_id: j2036082964
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Mê Linh, Nguyễn Ngọc Phương, Trường Sa.'
+- item_id: j2036083119
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 2, Nguyễn Hữu Cảnh.'
+- item_id: j2036083164
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Trung Ngạn, Tôn Đức Thắng.'
+- item_id: j2036083168
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j2036083228
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 2, Nguyễn Hữu Cảnh.'
+- item_id: j2036083240
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 2, Nguyễn Hữu Cảnh.'
+- item_id: j2036083298
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Tôn Đức Thắng, Đồng Khởi.'
+- item_id: j2036083316
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Tự Trọng, Tôn Đức Thắng.'
+- item_id: j2036083350
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Khánh Hội, Tôn Đức Thắng.'
+- item_id: j2036083509
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 2, Nguyễn Hữu Cảnh.'
+- item_id: j2036141666
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Nam Kỳ Khởi Nghĩa, Võ Thị Sáu.'
+- item_id: j2036141724
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Nam Kỳ Khởi Nghĩa, Tú Xương.'
+- item_id: j2036141745
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j2214315488
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Nguyễn Văn Trỗi, Trường Sa.'
+- item_id: j2231006702
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Hoàng Sa, Trần Nguyên Đán.'
+- item_id: j2289923630
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Văn Cừ, Phan Văn Trị.'
+- item_id: j2291062340
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Đình Phùng, Đào Duy Từ.'
+- item_id: j2300360523
+  decision: accepted
+  flags_seen:
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MEET-WITHOUT-SHARED-NODE: the streets meet here through a roundabout, median crossing or
+    slip lane (meet here without a shared node: Cầu Lê Văn Sỹ / Trường Sa).'
+- item_id: j2300361543
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j2305201705
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Cầu Ông Lãnh, Hoàng Diệu.'
+- item_id: j2343994265
+  decision: accepted
+  flags_seen:
+  - J-MANY-NODES
+  reason: 'J-MANY-NODES: many nodes confirmed as one place or one complex crossing (visual review).'
+- item_id: j2348757730
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Khánh Hội, Vĩnh Hội.'
+- item_id: j2348761055
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Khánh Hội, Vĩnh Hội.'
+- item_id: j2358070582
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. roundabout_or_place, 4 node(s), streets: Pasteur, Võ Văn Kiệt.'
+- item_id: j2364030596
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Nguyễn Thị Minh Khai.'
+- item_id: j2364059999
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thị Minh Khai, Đường Nguyễn Thiện
+    Thuật.'
+- item_id: j2364075322
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Biểu, Trần Hưng Đạo.'
+- item_id: j2364089048
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Nguyễn Văn Cừ, Trần Hưng Đạo.'
+- item_id: j2366592581
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Tất Thành, Ngô Văn Sở.'
+- item_id: j2393614147
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cách Mạng Tháng Tám, Nguyễn Thị Diệu.'
+- item_id: j2393615146
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cách Mạng Tháng Tám, Hồ Xuân Hương.'
+- item_id: j2403044874
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 1, Xô Viết Nghệ Tĩnh.'
+- item_id: j2403044881
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Thị Nghè 1, Nguyễn Thị Minh Khai.'
+- item_id: j2430403745
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 31, Đường Số 33.'
+- item_id: j2664205599
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Kỳ Khởi Nghĩa, Nguyễn Thị Minh Khai.'
+- item_id: j2686613215
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Cầu Trần Khánh Dư, Hoàng Sa.'
+- item_id: j2730493477
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Hải Triều, Hồ Tùng Mậu.'
+- item_id: j2899065691
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lưu Văn Lang, Phan Bội Châu.'
+- item_id: j3178235965
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j3257247348
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thông, Điện Biên Phủ.'
+- item_id: j3257259160
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thông, Ngô Thời Nhiệm.'
+- item_id: j3335314137
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bến Vân Đồn, Dẫn Cầu Calmette.'
+- item_id: j3335337343
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Huệ, Nguyễn Thiệp.'
+- item_id: j3335337345
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thiệp, Đồng Khởi.'
+- item_id: j3415439858
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trường Sa, Vũ Huy Tấn.'
+- item_id: j3474054214
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Nguyễn Thị Minh Khai.'
+- item_id: j4035870191
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Ngô Cát, Ngô Thời Nhiệm.'
+- item_id: j4099242263
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Đinh Tiên Hoàng.'
+- item_id: j4597095606
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bùi Viện, Đề Thám.'
+- item_id: j4600569893
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 2 node(s), streets: Bùi Thị Xuân, Lương Hữu Khánh.'
+- item_id: j4601580281
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Bỉnh Khiêm, Nguyễn Hữu Cảnh.'
+- item_id: j4602358365
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Văn Trường, Yersin.'
+- item_id: j4603243122
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bùi Viện, Cống Quỳnh.'
+- item_id: j4603720647
+  decision: accepted
+  flags_seen:
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MEET-WITHOUT-SHARED-NODE: the streets meet here through a roundabout, median crossing or
+    slip lane (meet here without a shared node: Cống Quỳnh / Hồ Hảo Hớn).'
+- item_id: j4603761225
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phạm Ngũ Lão, Đỗ Quang Đẩu.'
+- item_id: j4604903936
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thị Minh Khai, Tôn Thất Tùng.'
+- item_id: j4605017103
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Phạm Hồng Thái.'
+- item_id: j4605022195
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bùi Thị Xuân, Lê Thị Riêng.'
+- item_id: j4605034952
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bùi Thị Xuân, Nam Quốc Cang.'
+- item_id: j4605065012
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cao Bá Nhạ, Trần Đình Xu.'
+- item_id: j4605453644
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hàn Thuyên, Pasteur.'
+- item_id: j4605462429
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Chu Mạnh Trinh, Nguyễn Du.'
+- item_id: j4605582026
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 2 node(s), streets: Nguyễn Thượng Hiền, Điện Biên Phủ.'
+- item_id: j4607247007
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cao Thắng, Nguyễn Sơn Hà.'
+- item_id: j4608280833
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Anh Xuân, Lê Thánh Tôn.'
+- item_id: j4608688128
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Lê Anh Xuân, Phạm Hồng Thái.'
+- item_id: j4608690975
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn An Ninh, Trương Định.'
+- item_id: j4608867550
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Lai, Tôn Thất Tùng.'
+- item_id: j4608876662
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MANY-NODES:
+    many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Cống Quỳnh / Nguyễn Trãi; Cống Quỳnh / Phạm Ngũ Lão; Nguyễn Trãi / Phạm Ngũ Lão).'
+- item_id: j4609314796
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Thái Học, Nguyễn Thị Nghĩa,
+    Phạm Ngũ Lão.'
+- item_id: j4609319428
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phạm Ngũ Lão, Yersin.'
+- item_id: j4609802775
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bùi Viện, Trần Hưng Đạo.'
+- item_id: j4610625914
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  - J-MANY-NODES
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review); J-MANY-NODES:
+    many nodes confirmed as one place or one complex crossing (visual review); J-MEET-WITHOUT-SHARED-NODE:
+    the streets meet here through a roundabout, median crossing or slip lane (meet here without a shared
+    node: Cách Mạng Tháng Tám / Lê Thị Riêng; Cách Mạng Tháng Tám / Lý Tự Trọng; Cách Mạng Tháng Tám /
+    Nguyễn Thị Nghĩa; Cách Mạng Tháng Tám / Nguyễn Trãi; Cách Mạng Tháng Tám / Phạm Hồng Thái; Lê Thị
+    Riêng / Lý Tự Trọng; Lê Thị Riêng / Nguyễn Thị Nghĩa; Lê Thị Riêng / Nguyễn Trãi; Lê Thị Riêng / Phạm
+    Hồng Thái; Lý Tự Trọng / Nguyễn Thị Nghĩa; Lý Tự Trọng / Nguyễn Trãi; Lý Tự Trọng / Phạm Hồng Thái;
+    Nguyễn Thị Nghĩa / Nguyễn Trãi; Nguyễn Thị Nghĩa / Phạm Hồng Thái; Nguyễn Trãi / Phạm Hồng Thái).'
+- item_id: j4612970105
+  decision: accepted
+  flags_seen:
+  - J-MANY-NODES
+  reason: 'J-MANY-NODES: many nodes confirmed as one place or one complex crossing (visual review).'
+- item_id: j4614008658
+  decision: accepted
+  flags_seen:
+  - J-WIDE
+  reason: 'J-WIDE: wide junction confirmed as one place or one complex crossing (visual review).'
+- item_id: j4617355735
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bùi Viện, Đỗ Quang Đẩu.'
+- item_id: j4631762591
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Trần Bình Trọng, Trần Hưng Đạo.'
+- item_id: j4673510847
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Lê Lai, Phạm Hồng Thái, Trương Định.'
+- item_id: j4673706004
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Sa, Nguyễn Thị Minh Khai.'
+- item_id: j4905853979
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Rạch Bùng Binh.'
+- item_id: j5110352162
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Nguyễn Cửu Vân, Đường Trần Văn Khê.'
+- item_id: j5235743434
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Văn Hân, Đường Trần Văn Khê.'
+- item_id: j5500064101
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Ông Lãnh, Nguyễn Thái Học.'
+- item_id: j5500064102
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cô Giang, Nguyễn Thái Học.'
+- item_id: j5724515848
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Trường Tộ, Đào Duy Từ.'
+- item_id: j5727064121
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Đường Hoa Lan, Đường Nguyễn Công Hoan.'
+- item_id: j5727122042
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Kiệu, Phan Đình Phùng.'
+- item_id: j5735511406
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Hàm Nghi, Tôn Đức Thắng, Võ Văn Kiệt.'
+- item_id: j5737753350
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hải Triều, Nguyễn Huệ.'
+- item_id: j5740324106
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Bỉnh Khiêm, Nguyễn Hữu Cảnh.'
+- item_id: j5740395228
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Dạ Cầu Thị Nghè 2, Nguyễn Hữu Cảnh.'
+- item_id: j5742669214
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Văn Hưu, Nguyễn Du.'
+- item_id: j5743072751
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Tự Trọng, Nam Kỳ Khởi Nghĩa.'
+- item_id: j5757778742
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Lạc, Ngô Tất Tố.'
+- item_id: j5757778745
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Ngô Tất Tố, Trần Quang Long.'
+- item_id: j5757778746
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Ngô Tất Tố, Đường Nguyễn Công Trứ.'
+- item_id: j5758114505
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Đình Chiểu, Đường Nguyễn Thiện Thuật.'
+- item_id: j5762610054
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thượng Hiền, Nguyễn Thị Minh Khai.'
+- item_id: j5762610094
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cao Thắng, Nguyễn Đình Chiểu.'
+- item_id: j5762711576
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cống Quỳnh, Phạm Viết Chánh.'
+- item_id: j5764789632
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thượng Hiền, Nguyễn Đình Chiểu.'
+- item_id: j5764789639
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Điện Biên Phủ, Đường Vườn Chuối.'
+- item_id: j5764793095
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Bông, Lê Văn Duyệt.'
+- item_id: j5764818656
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Điện Biên Phủ, Đường Nguyễn Hiền.'
+- item_id: j5764869373
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bàn Cờ, Nguyễn Đình Chiểu.'
+- item_id: j5772092726
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Hoàng Diệu, Nguyễn Hữu Hào.'
+- item_id: j5772092897
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Bến Vân Đồn, Nguyễn Hữu Hào.'
+- item_id: j5772101027
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Chính Thắng, Trần Quốc Thảo.'
+- item_id: j5772158997
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cô Giang, Đề Thám.'
+- item_id: j5772159000
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Võ Văn Kiệt, Đề Thám.'
+- item_id: j5772746292
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Hữu Hào, Đường số 41.'
+- item_id: j5778272132
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Hữu Hào, Đường số 41.'
+- item_id: j5778287259
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 16, Đường Số 20.'
+- item_id: j5778300421
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Ngô Thời Nhiệm, Trương Định.'
+- item_id: j5778300422
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bà Huyện Thanh Quan, Ngô Thời Nhiệm.'
+- item_id: j5778872977
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nam Kỳ Khởi Nghĩa, Ngô Thời Nhiệm.'
+- item_id: j5778872999
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cô Bắc, Đề Thám.'
+- item_id: j5780755933
+  decision: accepted
+  flags_seen:
+  - J-MANY-NODES
+  - J-CONNECTORS
+  reason: 'J-MANY-NODES: many nodes confirmed as one place or one complex crossing (visual review); J-CONNECTORS:
+    connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j5794854808
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Trãi, Trần Bình Trọng.'
+- item_id: j5806004698
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Biểu, Nguyễn Trãi.'
+- item_id: j5811283440
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bến Chương Dương, Võ Văn Kiệt.'
+- item_id: j6387670790
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 5 node(s), streets: Ký Con, Trần Hưng Đạo, Yersin.'
+- item_id: j6573748228
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lý Chính Thắng, Nguyễn Thông.'
+- item_id: j6637081020
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Bông, Đinh Tiên Hoàng.'
+- item_id: j6637081021
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Bông, Lê Văn Duyệt.'
+- item_id: j6639705119
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 3 node(s), streets: Nguyễn Hữu Cảnh, Tôn Đức Thắng.'
+- item_id: j6727011191
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Cống Quỳnh, Nguyễn Thị Minh Khai.'
+- item_id: j6790789090
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Trãi, Tôn Thất Tùng.'
+- item_id: j6858588487
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Lê Duẩn, Mạc Đĩnh Chi.'
+- item_id: j6858588489
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Duẩn, Pasteur.'
+- item_id: j6858588491
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Duẩn, Nam Kỳ Khởi Nghĩa.'
+- item_id: j6858588499
+  decision: accepted
+  flags_seen:
+  - J-MEET-WITHOUT-SHARED-NODE
+  reason: 'J-MEET-WITHOUT-SHARED-NODE: the streets meet here through a roundabout, median crossing or
+    slip lane (meet here without a shared node: Đinh Tiên Hoàng / Tôn Đức Thắng).'
+- item_id: j6859935900
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Du, Đồng Khởi.'
+- item_id: j9457086585
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Thánh Tôn, Tôn Đức Thắng.'
+- item_id: j9582474882
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j9608426540
+  decision: accepted
+  flags_seen:
+  - J-CONNECTORS
+  reason: 'J-CONNECTORS: connectors confirmed as slip lanes of this crossing (visual review).'
+- item_id: j9690705590
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Ngô Văn Năm, Tôn Đức Thắng.'
+- item_id: j9722186805
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Lê Lợi, Nguyễn Trung Trực.'
+- item_id: j10215863915
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Ký Con, Nguyễn Công Trứ.'
+- item_id: j10215974126
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Ký Con, Nguyễn Thái Bình.'
+- item_id: j10215974129
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Ký Con, Đặng Thị Nhu.'
+- item_id: j10230273817
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Số 2 Cư Xá Đô Thành, Đường Số 6 Cư
+    Xá Đô Thành.'
+- item_id: j10557693663
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. compact, 2 node(s), streets: Calmette, Trần Hưng Đạo.'
+- item_id: j10560232673
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Lê Lợi, Nguyễn Huệ.'
+- item_id: j10750240733
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Kiệu, Phan Đình Phùng.'
+- item_id: j10765339999
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Thị Minh Khai, Phùng Khắc Khoan.'
+- item_id: j10945450649
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Hoàng Hoa Thám, Trần Nguyên Đán.'
+- item_id: j11140371367
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hồ Huấn Nghiệp, Đồng Khởi.'
+- item_id: j11364145943
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Phan Liêm, Điện Biên Phủ.'
+- item_id: j11801821651
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Bùi Thị Xuân, Tôn Thất Tùng.'
+- item_id: j11801821653
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Sương Nguyệt Anh, Tôn Thất Tùng.'
+- item_id: j11900708633
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Sa, Rạch Bùng Binh, Trương Định.'
+- item_id: j12157150905
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Thị Minh Khai, Trương Định.'
+- item_id: j12157150907
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huyền Trân Công Chúa, Nguyễn Thị Minh Khai.'
+- item_id: j12212093091
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Thúc Kháng, Nam Kỳ Khởi Nghĩa.'
+- item_id: j12303964302
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoa Hồng, Đường số 11.'
+- item_id: j12303964305
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Đường Hoa Lan, Đường số 11.'
+- item_id: j12584655704
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Bùi Thị Xuân, Cống Quỳnh.'
+- item_id: j12783406478
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: An Dương Vương, Trần Bình Trọng.'
+- item_id: j12991007909
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Huỳnh Khương Ninh, Đinh Tiên Hoàng.'
+- item_id: j13156774610
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hai Bà Trưng, Trần Quốc Toản.'
+- item_id: j13326767075
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Văn Nguyễn, Đặng Dung.'
+- item_id: j13665660080
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Ngọc Phương, Xô Viết Nghệ Tĩnh.'
+- item_id: j13665660081
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trường Sa, Xô Viết Nghệ Tĩnh.'
+- item_id: j13864848976
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Sa, Điện Biên Phủ.'
+- item_id: j13864848996
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Hoàng Sa, Điện Biên Phủ.'
+- item_id: j13919166080
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 4 node(s), streets: Lê Thạch, Lê Văn Linh.'
+- item_id: j13958208673
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Nguyễn Ngọc Phương, Trường Sa.'
+- item_id: j13983865129
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Trần Nguyên Đán, Trần Quang Khải.'
+- item_id: j14030366137
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Cư Trinh, Trần Đình Xu.'
+- item_id: j14030366142
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. divided_crossing, 2 node(s), streets: Nguyễn Cư Trinh, Nguyễn Trãi.'
+- item_id: j14095292187
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. with_connectors, 2 node(s), streets: Huỳnh Văn Bánh, Phan Đình Phùng.'
+- item_id: j14138736264
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cầu Ông Lãnh, Nguyễn Thái Học.'
+- item_id: j14268222925
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Võ Thị Sáu, Đinh Tiên Hoàng.'
+- item_id: j14297408453
+  decision: accepted
+  flags_seen: []
+  reason: 'No automatic flag. single_node, 1 node(s), streets: Cách Mạng Tháng Tám, Nguyễn Du.'

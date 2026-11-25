@@ -1,0 +1,45 @@
+# Phase 1 benchmark: 50 questions per type, all in the development split.
+# v0.2 replaces the unused draft v0.1: lane-count questions were dropped (52 of 56
+# candidate streets have 2 lanes), count answers are stratified by value, and L4
+# paraphrases must keep "tuân thủ".
+# Answers and evidence are computed from the processed graph by code
+# (src/graph_llm/questions/generate.py); the LLM only paraphrases the question text.
+benchmark_version: v0.2
+graph_version: hcmc_district1_v2_p1
+split: development
+seed: 20261124
+
+templates:
+  - template_id: L1_oneway
+    required_phrases: ["một chiều"]
+    count: 25
+    text: "Đường {street} có phải là đường một chiều không?"
+  - template_id: L1_length
+    required_phrases: ["lớn hơn", "mét"]
+    count: 25
+    text: "Tổng chiều dài đường {street} trong khu vực có lớn hơn {threshold_m} mét không?"
+  - template_id: L2_neighbours
+    required_phrases: ["hẻm", "nội bộ"]
+    count: 50
+    text: "Những đường nào giao nhau hoặc nối trực tiếp với đường {street}? Không tính hẻm và đường nội bộ."
+  - template_id: L3_next_on_oneway
+    required_phrases: ["một chiều", "hẻm", "nội bộ"]
+    count: 50
+    text: "Một xe đang ở giao lộ giữa đường {cross_street} và đường {oneway_street}. Đường {oneway_street} là đường một chiều. Nếu xe đi tiếp theo đường {oneway_street} đúng chiều lưu thông, thì đường đầu tiên mà xe gặp tiếp theo là đường nào? Không tính hẻm và đường nội bộ."
+  - template_id: L4_shortest_route
+    required_phrases: ["ngắn nhất", "tuân thủ", "một chiều", "mét"]
+    count: 50
+    text: "Tìm tuyến đường ngắn nhất cho ô tô, tuân thủ đường một chiều, đi từ giao lộ đường {start_a} và đường {start_b} đến giao lộ đường {end_a} và đường {end_b}. Cho biết thứ tự các đường đi qua và tổng chiều dài tuyến đường tính bằng mét."
+  - template_id: L5_two_way_neighbours
+    required_phrases: ["hai chiều", "hẻm", "nội bộ"]
+    count: 25
+    text: "Trong các đường giao nhau hoặc nối trực tiếp với đường {street} (không tính hẻm và đường nội bộ), có bao nhiêu đường cho phép xe đi hai chiều trên toàn tuyến?"
+  - template_id: L5_common_neighbours
+    required_phrases: ["cả", "hẻm", "nội bộ"]
+    count: 25
+    text: "Có bao nhiêu đường giao nhau hoặc nối trực tiếp với cả đường {street_a} và đường {street_b}? Không tính hẻm và đường nội bộ."
+
+paraphrase_instruction: |
+  Viết lại câu hỏi sau bằng tiếng Việt tự nhiên, như một người dân hỏi đường. Giữ nguyên ý nghĩa và mọi điều kiện của câu hỏi.
+  Giữ nguyên chính xác tên mọi con đường (không viết tắt, không bỏ dấu, không thêm chữ "đường" vào giữa tên).
+  Chỉ trả về câu hỏi đã viết lại, không giải thích.

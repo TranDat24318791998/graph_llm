@@ -2,7 +2,7 @@
 
 This file tracks the progress of the thesis project. The research design itself is in `docs/thesis_proposal.md`; this file only tracks what is done, what is next and what is still undecided.
 
-**Last updated:** 2026-11-16
+**Last updated:** 2026-11-25
 
 ## How to maintain this file
 
@@ -50,14 +50,17 @@ Exit criterion: a frozen, cleaned graph of the chosen area is on disk, its loadi
 - [x] Confirm the study area and how its boundary is defined: fixed rectangle around District 1 (`configs/areas/hcmc_district1.yaml`)
 - [x] Download the area with OSMnx and freeze the snapshot in `data/raw/hcmc_district1/` with its download date and checksum (2026-11-16: 2,024 nodes, 4,448 directed edges)
 - [x] Attribute-coverage survey: `docs/reports/osm_coverage_hcmc_district1.md`
-- [ ] Owner review of the coverage report
-- [ ] Decide which attributes are usable for questions, based on the survey
-- [ ] Decide how unnamed edges (14.5 percent of edges, 5 percent of length) and alleys (`Hẻm ...`, 215 of 534 names) are treated
-- [ ] Street-name normalization: diacritics, abbreviations, duplicate names, unnamed segments
-- [ ] Street model: rule for merging same-name segments into one street
-- [ ] Schema for the processed graph
-- [ ] Unit tests on small hand-checked subgraphs
-- [ ] Coverage report in `docs/`
+- [x] Second snapshot `hcmc_district1_v2` downloaded on the local machine (2026-11-24); coverage report `docs/reports/osm_coverage_hcmc_district1_v2.md`
+- [x] Owner review of the coverage report (2026-11-24)
+- [x] Decide which attributes are usable for questions: `name`, `highway`, `oneway`, `length`; `lanes` only on edges that carry it; no other source and no imputation (2026-11-24)
+- [x] Decide how unnamed edges and alleys are treated: both stay in the road graph for routing; neither is asked about in Phase 1; unnamed edges are left out of route street sequences but count in route length (2026-11-24)
+- [x] Street-name normalization module `graph_llm.names.normalize`: NFC, look-alike characters, "Đường" prefix, case, ASCII lookup key
+- [x] Street model: two layers (unchanged road graph, street layer); pieces of one name joined within 200 m along the network; remaining cases decided by reviewed overrides in `configs/graphs/hcmc_district1_v2_p1.yaml`
+- [x] Road graph reduced to its largest strongly connected component (removes 50 nodes, 81 edges)
+- [x] Schema for the processed graph (`schemas/street.py`), frozen storage with checksums (`graph/processed.py`)
+- [x] Unit tests on small hand-checked subgraphs
+- [ ] Owner review of the processing config: street overrides, internal road list, alias dictionary (preview report generated, not frozen yet)
+- [ ] Freeze `hcmc_district1_v2_p1` with `scripts/build_graph.py` and commit its report `docs/reports/street_model_hcmc_district1_v2_p1.md`
 
 ### P2: Question set
 
@@ -180,3 +183,15 @@ Candidate directions (proposal Section 5.5): A adaptive routing, B evidence-awar
 | 2026-11-16 | RQ4 direction is not ranked in advance; it is chosen by stated conditions after the pilot | The survey shows where gaps exist, but which direction is worth pursuing depends on pilot data |
 | 2026-11-16 | Every question records the five items of survey Section 7.2 (directed evidence, direction dependence, structural features, per-representation outcome and cost, entity-linking difficulty) | Keeps all three RQ4 directions open without regenerating the benchmark |
 | 2026-11-16 | RQ4 added: design a method from the RQ1-RQ3 findings that is more accurate or cheaper than the best single representation | The thesis must contribute a solution with novelty, not only compare existing methods |
+| 2026-11-24 | Primary environment moves to the owner's local Mac; LLMs run locally with Ollama; the vLLM server stays supported through configuration; git-ignored data is synced with the server through Google Drive | The owner works from home; keeps both backends usable |
+| 2026-11-24 | No attribute is filled in from other sources (Google Maps) or imputed; questions use attributes only where OSM carries them | Google Maps terms forbid building datasets from its content; ground truth is defined against OSM; imputed values would be guesses, not facts |
+| 2026-11-24 | Processed graph = two layers: the OSM road graph reduced to its largest strongly connected component, unchanged otherwise; and a street layer that joins same-name pieces within 200 m along the network, with reviewed overrides for the rest | Routing stays exact on OSM edges, while streets that OSM stores in pieces become one entity; every non-automatic case is an explicit, reasoned decision |
+| 2026-11-24 | A second snapshot `hcmc_district1_v2` (same rectangle, 2,026 nodes, 4,451 directed edges, sha256 `94e84d85...`) is downloaded on the local machine and is the one used from now on; `hcmc_district1` stays on the server and is not used further | The first snapshot is not available locally, and re-downloading an existing area id is forbidden. Nothing depended on the first snapshot except its coverage report |
+| 2026-11-25 | Phase 1 priority: the processed graph (how OSM data is turned into the reference graph) is the most important Phase 1 output. Graph v2 is built with a documented processing design and a review of every regular street and every junction before any thesis result is produced | The reference graph is a claimed contribution (a large, verified road-network graph), and processing rules found on a small area must scale to larger areas without hidden bugs |
+| 2026-11-25 | EXP-001 and EXP-002 on graph `hcmc_district1_v2_p1` / benchmark v0.2 are pipeline trials only. The running LightRAG index is completed and M2 is run once for reference; EXP-002 is not run on the old graph. All Phase 1 experiments are rerun on graph v2 with a regenerated corpus, LightRAG index and benchmark | Map review found modelling gaps (divided roads, junction clusters) that change answers and corpus text |
+| 2026-11-25 | A divided road (two parallel one-way carriageways of one street in opposite directions) is a two-way road with a median, not a one-way road; it gets its own direction status | Matches common understanding ("is Nguyễn Huệ one-way?" is answered "no"); OSM models each carriageway as a separate one-way way |
+| 2026-11-25 | Two streets meet when they reach the same junction, where a junction may be a cluster of nodes (roundabout, both carriageways of a divided road, short connecting links), not only when they share a node | Streets at a roundabout or across a divided road meet in reality although OSM gives them different nodes |
+| 2026-11-25 | OSM discrepancies (OSM disagrees with reality): OSM stays the ground truth and the affected street or junction is excluded from questions; OSM data is never corrected (design Q-A, option a) | Keeps "correct with respect to OSM" clean and reproducible |
+| 2026-11-25 | Turn restrictions: OSM restriction relations are frozen with the snapshot; unconditional restrictions that apply to cars are enforced in routing; route questions whose answer passes a time-conditional restriction are excluded (design Q-B, option ii) | 391 restrictions exist in the area (107 unconditional, mostly for cars); ignoring them makes "legal route" answers illegal in reality; a time-free rule avoids adding a time of day to every question |
+| 2026-11-25 | Graph v2 review covers every regular street and every junction where regular streets meet; alley-only junctions are not reviewed (design Q-C) | Phase 1 questions do not use alleys |
+| 2026-11-25 | Owner delegated all graph v2 decisions overnight; every decision is logged in `PROGRESS.md` | Owner away |
