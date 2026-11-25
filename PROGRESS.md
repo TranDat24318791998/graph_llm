@@ -140,3 +140,4 @@ Working log for Phase 1. The long-term plan and the decision log are in `plan/PL
   - EXP-003 M3N: 0.216 (0.52 / 0.18 / 0.16 / 0.02 / 0.20).
   - EXP-003 M3T: 0.312 (0.82 / 0.46 / 0.16 / 0.02 / 0.10).
   - LightRAG index on corpus text_v2 started 05:49; 61 packs done at 07:44. EXP-003 M2 follows automatically. Analysis (McNemar, error stages, cost) waits until M2 is done.
+- Data pushed to Google Drive at 09:02 (85 files, 96.3 MB): data/raw, corpora, processed graphs, the graph v1 LightRAG index, runs and .cache. The graph v2 LightRAG index was still being built and is pushed after it finishes. `data/data_manifest.json` updated and committed.
