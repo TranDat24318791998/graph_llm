@@ -3,8 +3,9 @@
 Steps:
   1. Read data/data_manifest.json (from git) and check free disk space.
   2. Download the data directories from the remote and verify every file's SHA-256.
-  3. Optionally rebuild each processed graph from its snapshot and check that it is
-     identical to the downloaded one (--verify-rebuild).
+  3. Optionally rebuild every graph in configs/graphs/ (processed graph v1 and
+     reference graph v2) from its snapshot and check that it is identical to the
+     downloaded one (--verify-rebuild).
   4. Optionally check that an LLM endpoint answers (--llm-config).
   5. Run the test suite.
 
@@ -25,7 +26,7 @@ from pathlib import Path
 
 import yaml
 
-from graph_llm.data_sync import MANIFEST_PATH, check_rebuild_matches, pull_data
+from graph_llm.data_sync import MANIFEST_PATH, check_graph_rebuild, pull_data
 from graph_llm.llm.client import LLMClient
 from graph_llm.schemas.data_manifest import DataManifest
 from graph_llm.schemas.llm import LLMEndpointConfig
@@ -73,12 +74,20 @@ def main() -> None:
     if arguments.verify_rebuild:
         for config_path in sorted(Path("configs/graphs").glob("*.yaml")):
             with tempfile.TemporaryDirectory() as work_directory:
-                rebuild_problems = check_rebuild_matches(
+                rebuild_check = check_graph_rebuild(
                     Path("data/raw"), Path("data/processed"), config_path, Path(work_directory)
                 )
-            if rebuild_problems:
-                raise SystemExit("\n".join(rebuild_problems))
-            print(f"Rebuilt {config_path.name}: identical to the downloaded graph.")
+            if rebuild_check is None:
+                print(f"Skipped {config_path.name}: a review log, not a graph config.")
+                continue
+            if rebuild_check.problems:
+                raise SystemExit("\n".join(rebuild_check.problems))
+            if rebuild_check.notes:
+                print(f"Rebuilt {config_path.name}: equal to the downloaded graph, with notes:")
+                for note in rebuild_check.notes:
+                    print(f"  {note}")
+            else:
+                print(f"Rebuilt {config_path.name}: identical to the downloaded graph.")
 
     if arguments.llm_config is not None:
         check_llm_endpoint(arguments.llm_config)

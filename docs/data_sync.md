@@ -101,7 +101,7 @@ What it does:
 
 1. Reads `data/data_manifest.json` and checks that free disk space is at least twice the data size.
 2. Downloads the listed directories from the remote and verifies every file's SHA-256. It stops and lists the files that are missing or changed. Local files that are not in the manifest, such as newer runs, are left alone.
-3. With `--verify-rebuild`, it rebuilds every processed graph in `configs/graphs/` from its snapshot in a temporary directory, and checks that the rebuilt files are byte-identical to the downloaded ones. This proves that the pipeline is reproducible.
+3. With `--verify-rebuild`, it rebuilds every graph in `configs/graphs/` (processed graph v1 and reference graph v2) from its snapshot in a temporary directory, and compares the rebuilt files with the downloaded ones. Review logs in that directory are skipped. The graph and street files must be byte-identical. The junctions file of a reference graph holds computed distances, and two machines can round the last digit differently; when its bytes differ it is compared value by value, and a difference within a relative tolerance of 1e-9 is printed as a note instead of an error. This proves that the pipeline is reproducible.
 4. With `--llm-config <file>`, it sends one short chat request to that endpoint, bypassing the response cache.
 5. Runs the test suite.
 
@@ -124,3 +124,4 @@ Other options: `--remote <remote:path>` overrides the remote recorded in the man
 | `token expired` or `invalid_grant` | Run `rclone config reconnect gdrive:`. |
 | `changed: <file>` after download | The Drive copy differs from what the manifest in git describes. Usually the data was pushed again without committing the new manifest, or the manifest was committed without pushing. Rerun `push_data.py` on the source machine and commit the manifest. |
 | `rebuilt graph differs` with `--verify-rebuild` | The library versions differ between machines (for example OSMnx). Check `uv.lock` is the same and run `uv sync`. |
+| `rebuilt junctions equal the stored junctions up to floating-point rounding` | Not an error. The Mac (ARM) and the Linux server (x86-64) round `cos` and `hypot` differently in the last digit. Observed on `hcmc_district1_v3_p2`: one `spread_m` value out of 1,247 junctions, 6.510835709338412 against 6.510835709338413. |
